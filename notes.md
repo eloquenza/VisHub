@@ -22,6 +22,7 @@ Newer versions seem to be based on GraphQL:
 
 [GHArchive](https://www.gharchive.org/)
 [Data saved by the GHArchive](https://data.gharchive.org/)
+[Possible preprocessed dataset for the graph visualization](http://snap.stanford.edu/data/github-social.html)
 
 ### Ideas
 
