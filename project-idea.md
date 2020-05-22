@@ -7,6 +7,10 @@ This is the exam for the master's program module "Visualization and Human-Comput
 
 A information visualization project that tries to visualize some aspects of GitHub, its users and their usage of GitHub. 
 
+Upon researching which data set I could use I followed the references given by our professor and stumbled upon [Stanford Network Analysis Project](http://snap.stanford.edu/data/index.html).
+I was particularly interested in using a data set which can be visualized in a graph, esp. of a large network (read: internet, tcp, etc.) topology, where I found a reference to a data set of a social network of GitHub developers.
+That quickly evolved into an idea to use any GitHub data as this allowed me not only to display graphs, but also some smaller, simpler visualizations where I could fully apply the concepts learned in this lecture.
+
 My previous idea, taking DotA2 data and visualizing professional game data, has been put on ice due to difficulties in accessing the data. It was either hard to get consistent, pre-processed data or hard to preprocess the data quickly enough. For this idea, I should have started atleast 2 months earlier.
 Also, I think this would have been harder to get into as an outsider, i.e. somebody not familiar with the game.
 
