@@ -110,8 +110,7 @@ data structure).
    * Zoomed drawing of GUI component, flow diagram, or similar.
 5. Discussion:
    * Reflect on design: advantages and disadvantages.
-   * Possible aspects: suitability for task, novelty, clarity, scalability, extensibility, cost of im-
-plementation.
+   * Possible aspects: suitability for task, novelty, clarity, scalability, extensibility, cost of implementation.
 
 ## Sheet 5: Realization
 
