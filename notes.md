@@ -17,6 +17,7 @@ Newer versions seem to be based on GraphQL:
 [GitHub GraphQL API v4](https://developer.github.com/v4/)
 
 [GitHub API - Event types](https://developer.github.com/v3/activity/event_types/)
+[GitHub API - Users API](https://developer.github.com/v3/users/)
 
 ### Dataset
 
@@ -30,7 +31,22 @@ Newer versions seem to be based on GraphQL:
 
 [Blog - Coderstats: GitHub data science](https://blog.coderstats.net/github/)
 
-#### Ideas on possible visualizations
+#### Ideas on possible GitHub visualizations
 
 [Devtrends](https://www.baresquare.com/github-devtrends/)
+[Devtrends data source](https://dev-source.herokuapp.com/)
+
+[User-Language Visualization](https://danielvdende.com/projects/gdc2014/about.html)
+
 [GitHut](https://githut.info/)
+[GitHut sources](https://github.com/littleark/githut/)
+
+#### Ideas on differing visualization options
+
+[Metabase allows for choosing different visualizations for the same dataset](https://www.metabase.com/docs/latest/users-guide/05-visualizing-results.html)
+
+### D3
+
+#### Search possibilities in a graph
+
+https://stackoverflow.com/questions/41456008/search-functionality-in-a-d3-js-graph
