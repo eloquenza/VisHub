@@ -15,5 +15,4 @@ In this project, students (read: here just me) are getting familiar with the Fiv
 The professor acts as the client for our application.
 By creating the design sheets, students (again, just me) are forced to externalize their internal thoughts which makes it easier to discuss the design ideas with their professor.
 
-[1]: <https://ieeexplore.ieee.org/abstract/document/7192707> "
-Sketching Designs Using the Five Design-Sheet Methodology "
+[1]: <https://ieeexplore.ieee.org/abstract/document/7192707> "Sketching Designs Using the Five Design-Sheet Methodology"
