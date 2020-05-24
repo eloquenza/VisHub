@@ -9,6 +9,7 @@ This project consists of two parts:
 1. Design sheets 1 and 5 (Ideation and Realization) created through the use of the [Five Design Sheet methodology][1] 
    * Look inside [./design-sheets](./design-sheets) for more, or...
    * ... directly open [Design sheet 1](./design-sheets/submissions/VisHub-design-sheet1.pdf)
+   * ... directly open [Design sheet 5](./design-sheets/submissions/VisHub-design-sheet5.pdf)
 2. Implementing the chosen design from sheet 5 in an application
 
 In this project, students (read: here just me) are getting familiar with the Five Design Sheet methodology in order to learn a more formal design process.
