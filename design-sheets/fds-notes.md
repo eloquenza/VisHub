@@ -127,4 +127,59 @@ data structure).
    * Estimates of cost (e. g., time or man-months)
    * Requirements of hardware, software, screen resolution etc.
 
+### Notes for sheet 5
+
+#### Operations
+
+* Layout/application starts in sub-page "users" - see orange underline
+* Clicking "VisHub" returns the users back to the main page, i.e. the "users" sub-page.
+* Clicking "users"/"repos"/"events"/"languages"/"meta" tabs open a sub-page where visualizations for the specific category can be found
+  
+* In first view, the author network viewer displays the whole graph
+* The author network viewer shows a "global" network of authors with no specific focus on any author.
+* Users can interact with the author network viewer by zooming in/out via mousewheel or scrolling via mouse grabbing
+* Hovering over a node in the author network viewer results in a tooltip containing more detailed info (e.g. full name, amount of repos/follower/following, ...) and highlighting this author and all incident edges
+* Users can search for a specific author via the search bar in the top left-hand corner of the author network viewer, resulting in:
+  * highlighting his node and all incident edges
+  * focusing on said user, which displays more information and graphs for said user below the author network viewer (see focus bottom left)
+  * Graph shown will only include author, all incident edges and a pre-configured depth of more connected authors
+  * General info about all users will be hidden
+* Clicking on a specific user in the author network viewer is the same operation as searching for his name.
+* Clicking on world map above the author network viewer will try to display the graph on a world map, if enough users have stated their location
+* Clicking on options will open a small menu which allows setting visualization related options such as the graph layout, planarity, configuring depth
+
+* Hovering over a bar in a bar chart results in displaying a tooltip containing more detailed info (e.g. exact amount) and highlighting the bar
+
+#### Discussion/Detail
+
+Positives:
+
+* highly interactive
+* most of the interesting data can be previewed in one view
+* being able to switch visualization layouts might make it possible to discover patterns that are not obvious at first.
+
+Negatives:
+
+* difficult to implement due to the amounts of data needed?
+* author network viewer seems overly complicated and maybe a view only for specific users is more appropriate
+* not all data can be viewed on one page, might be too overwhelming.
+* might be confusing that general info on users just "disappears"
+
+Possible aspects:
+
+* author network viewer is novel, but might not be that suitable. scalability seems questionable too, but due to search and limiting depth, this seems fine.
+* clarity is given due to ability to search
+* cost of implementation: 3-4 weeks?
+* Description of main algorithms (with references), design patterns, data structures.
+  * Rooted tree layout through d3.tree(): implements C. Buchheim et al, 2002
+  * Radial tree layout through d3.tree(): implements Reingold–Tilford “tidy” algorithm
+  * Force-directed layout through d3.layout.force(): implements quadtree via Barnes-Hut approximation
+  * Edge bundling through d3.layout.bundle(): implements Danny Holten's algorithm
+  * Circle layout/NetMaps through d3.layout.chord()
+  * Data structure are mostly JSONs given by the GitHub API which have to be preprocessed.
+  * BigQuery API allows for quick SQL-like queries - problem is having only 1 TB of "free" traffic.
+* Maths for computations, positioning of GUI elements, size proportions, etc.
+* Dependencies: a system capable of running a browser (ideally firefox), implementation will be done in JS, further library dependencies will be handled through build system (yarn/npm)
+* No specific requirements to hardware currently
+
 [1]: <https://www.gharchive.org/> "GHArchive"
