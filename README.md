@@ -11,6 +11,8 @@ This project consists of two parts:
    * ... directly open [Design sheet 1](./design-sheets/submissions/VisHub-design-sheet1.pdf)
    * ... directly open [Design sheet 5](./design-sheets/submissions/VisHub-design-sheet5.pdf)
 2. Implementing the chosen design from sheet 5 in an application
+   * The application can be found under [./application](./application)
+   * Please read the install.md inside ./application if you are interested in running this application: [./application/install.md](./application/install.md)
 
 In this project, students (read: here just me) are getting familiar with the Five Design Sheet methodology in order to learn a more formal design process.
 The professor acts as the client for our application.
