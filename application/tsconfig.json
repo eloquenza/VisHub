@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // module related settings
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // programming / code style guides related settings
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    // development / project setup related settigns
+    "baseUrl": "./src",
+    "noEmit": true,
+    "sourceMap": true, // enables to display original TS code in debugging
+    // jsx/react related settings
+    "jsx": "react",
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts"
+  ]
+}
