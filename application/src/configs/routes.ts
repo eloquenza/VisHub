@@ -23,13 +23,20 @@ function createRoutesMap(): RoutesMap {
   }
 
   const values = $enum(RouteNames).getValues()
-  const routesMap = values.reduce<LooseObject>((accum, route) => {
-    accum[route] = {
-      path: `/${RouteNames[route].toLowerCase()}`,
-      visibleName: RouteNames[route],
-    }
-    return accum
-  }, {})
+  // this is called object spread , allows to let every element
+  // of the iterable to be expanded into the expression without
+  // explicitly naming them
+  const routesMap = values.reduce<LooseObject>(
+    (accum, route) => ({
+      ...accum,
+      [route]: {
+        path: `/${RouteNames[route].toLowerCase()}`,
+        visibleName: RouteNames[route],
+      },
+    }),
+    {}
+  )
+
   // Type cast it back to a RoutesMap, for type safety and to get
   // run-time errors if the variable would not match the abovementioned
   // type

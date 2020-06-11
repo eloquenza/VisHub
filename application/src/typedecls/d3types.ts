@@ -18,8 +18,7 @@ export class SimulationNode implements d3.SimulationNodeDatum {
   }
 }
 
-export class SimulationLink
-  implements d3.SimulationLinkDatum<SimulationNode> {
+export class SimulationLink implements d3.SimulationLinkDatum<SimulationNode> {
   // optional - defining optional implementation properties - required for relevant typing assistance
   index?: number
 
