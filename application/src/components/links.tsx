@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as d3 from 'd3'
 import {d3Types} from 'typedecls'
 
@@ -25,14 +25,14 @@ class Link extends React.Component<SingleLinkProps, {}> {
   }
 }
 
-export default class Links extends React.Component<LinksProps, {}> {
-  render() {
-    const links = this.props.links.map(
-      (link: d3Types.SimulationLink, index: number) => {
-        return <Link key={index} link={link} />
-      }
+function Links({links}: LinksProps) {
+  const linkComponents = links.map(
+    (link: d3Types.SimulationLink, index: number) => (
+      <Link key={index} link={link} />
     )
+  )
 
-    return <g className="links">{links}</g>
-  }
+  return <g className="links">{linkComponents}</g>
 }
+
+export default Links

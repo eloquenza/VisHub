@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as d3 from 'd3'
 import {d3Types} from 'typedecls'
 
@@ -26,14 +26,14 @@ class Label extends React.Component<SingleLabelProps, {}> {
   }
 }
 
-export default class Labels extends React.Component<LabelsProps, {}> {
-  render() {
-    const labels = this.props.nodes.map(
-      (node: d3Types.SimulationNode, index: number) => {
-        return <Label key={index} node={node} />
-      }
+function Labels({nodes}: LabelsProps) {
+  const labelComponents = nodes.map(
+    (node: d3Types.SimulationNode, index: number) => (
+      <Label key={index} node={node} />
     )
+  )
 
-    return <g className="labels">{labels}</g>
-  }
+  return <g className="labels">{labelComponents}</g>
 }
+
+export default Labels
