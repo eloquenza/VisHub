@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-export class SimulationNode implements d3.SimulationNodeDatum {
+export class Vertex implements d3.SimulationNodeDatum {
   index?: number
   x?: number
   y?: number
@@ -18,19 +18,19 @@ export class SimulationNode implements d3.SimulationNodeDatum {
   }
 }
 
-export class SimulationLink implements d3.SimulationLinkDatum<SimulationNode> {
+export class Edge implements d3.SimulationLinkDatum<Vertex> {
   // optional - defining optional implementation properties - required for relevant typing assistance
   index?: number
 
   // must - defining enforced implementation properties
-  source: SimulationNode | string | number
-  target: SimulationNode | string | number
+  source: Vertex | string | number
+  target: Vertex | string | number
 
   value: number
 
   constructor(
-    source: string | number | SimulationNode,
-    target: string | number | SimulationNode,
+    source: string | number | Vertex,
+    target: string | number | Vertex,
     value: number
   ) {
     this.source = source
@@ -40,6 +40,6 @@ export class SimulationLink implements d3.SimulationLinkDatum<SimulationNode> {
 }
 
 export type Graph = {
-  nodes: SimulationNode[]
-  links: SimulationLink[]
+  vertices: Vertex[]
+  edges: Edge[]
 }

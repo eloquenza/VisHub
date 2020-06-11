@@ -3,33 +3,33 @@ import * as d3 from 'd3'
 import d3Types from 'typedecls'
 
 interface LabelsProps {
-  nodes: d3Types.SimulationNode[]
+  vertices: d3Types.Vertex[]
 }
 
 interface SingleLabelProps {
-  node: d3Types.SimulationNode
+  vertex: d3Types.Vertex
 }
 
 class Label extends React.Component<SingleLabelProps, {}> {
   readonly ref: React.RefObject<SVGTextElement> = React.createRef()
 
   componentDidMount() {
-    d3.select(this.ref.current).data([this.props.node])
+    d3.select(this.ref.current).data([this.props.vertex])
   }
 
   render() {
     return (
       <text className="label" ref={this.ref}>
-        {this.props.node.id}
+        {this.props.vertex.id}
       </text>
     )
   }
 }
 
-function Labels({nodes}: LabelsProps) {
-  const labelComponents = nodes.map(
-    (node: d3Types.SimulationNode, index: number) => (
-      <Label key={index} node={node} />
+function Labels({vertices}: LabelsProps) {
+  const labelComponents = vertices.map(
+    (vertex: d3Types.Vertex, index: number) => (
+      <Label key={index} vertex={vertex} />
     )
   )
 
