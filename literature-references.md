@@ -27,7 +27,7 @@ Newer versions seem to be based on GraphQL:
 
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
 [React documentation](https://reactjs.org/)
-[React router documentation](https://reacttraining.com/react-router/web/guides/quick-start)
+[React Router documentation](https://reacttraining.com/react-router/web/guides/quick-start)
 
 ## Ideas
 
