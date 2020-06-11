@@ -1,0 +1,44 @@
+nav {
+    background: hsl(210,12.2%,16.1%);
+    padding: 5px 20px;
+    max-width: 100% !important;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navElementsBase {
+    display: block;
+    width: auto;
+}
+
+.pageName {
+    composes: navElementsBase;
+    font-size: 28px;
+    order: 0;
+}
+
+.subPages {
+    composes: navElementsBase;
+    font-size: 14px;
+    order: 1;
+}
+
+.navLink {
+    text-decoration: none;
+    color: hsl(255,0%,100%);
+    font-weight: 600;
+}
+
+.navLink:hover {
+    color: hsla(0,0%,100%,.7);
+}
+
+.navLink:active {
+    text-decoration: underline;
+}
