@@ -29,6 +29,10 @@ Newer versions seem to be based on GraphQL:
 [React documentation](https://reactjs.org/)
 [React Router documentation](https://reacttraining.com/react-router/web/guides/quick-start)
 
+### Style guide
+
+[Airbnb's React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming)
+
 ## Ideas
 
 ### Data science on GitHub
