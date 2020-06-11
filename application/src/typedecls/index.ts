@@ -1,3 +1,3 @@
-import {d3Types} from './d3types'
+import * as d3Types from './d3types'
 
-export {d3Types}
+export default d3Types
