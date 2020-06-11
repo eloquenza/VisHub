@@ -1,76 +1,65 @@
-import React from 'react';
-import * as d3 from 'd3';
-import { d3Types } from "typedecls";
-import { Links, Nodes, Labels } from "components";
+import React from 'react'
+import * as d3 from 'd3'
+import {d3Types} from 'typedecls'
+import {Links, Nodes, Labels} from 'components'
 
-interface Props {
-  width: number;
-  height: number;
-  graph: d3Types.d3Graph;
+interface AppProps {
+  width: number
+  height: number
+  graph: d3Types.Graph
 }
 
-export default class App extends React.Component<Props, {}> {
-  simulation: d3.Simulation<any, any>;
+export default class App extends React.Component<AppProps, {}> {
+  simulation: d3.Simulation<d3Types.SimulationNode, d3Types.SimulationLink>
 
-  constructor(props: Props) {
-    super(props);
-    this.simulation = d3.forceSimulation(this.props.graph.nodes)
-      .force("link", d3.forceLink(this.props.graph.links).id((d: d3Types.d3Node) => {
-        return typeof d.id === 'undefined' ? "undefined" : d.id;
-      }).strength(0.3))
-      .force("charge", d3.forceManyBody().strength(-100))
-      .force("center", d3.forceCenter(this.props.width / 2, this.props.height / 2));
+  constructor(props: AppProps) {
+    super(props)
+
+    const {width, height, graph} = props
+    this.simulation = d3
+      .forceSimulation(graph.nodes)
+      .force(
+        'link',
+        d3
+          .forceLink(graph.links)
+          .id((d: d3Types.SimulationNode) => {
+            return typeof d.id === 'undefined' ? 'undefined' : d.id
+          })
+          .strength(0.3)
+      )
+      .force('charge', d3.forceManyBody().strength(-100))
+      .force('center', d3.forceCenter(width / 2, height / 2))
   }
 
   componentDidMount() {
-    const node = d3.selectAll(".node");
-    const link = d3.selectAll(".link");
-    const label = d3.selectAll(".label");
-
-    this.simulation.nodes(this.props.graph.nodes).on("tick", ticked);
+    const {nodes} = this.props.graph
+    const node = d3.selectAll('.node')
+    const link = d3.selectAll('.link')
+    const label = d3.selectAll('.label')
 
     function ticked() {
       link
-        .attr("x1", function (d: any) {
-          return d.source.x;
-        })
-        .attr("y1", function (d: any) {
-          return d.source.y;
-        })
-        .attr("x2", function (d: any) {
-          return d.target.x;
-        })
-        .attr("y2", function (d: any) {
-          return d.target.y;
-        });
+        .attr('x1', (d: any) => d.source.x)
+        .attr('y1', (d: any) => d.source.y)
+        .attr('x2', (d: any) => d.target.x)
+        .attr('y2', (d: any) => d.target.y)
 
-      node
-        .attr("cx", function (d: any) {
-          return d.x;
-        })
-        .attr("cy", function (d: any) {
-          return d.y;
-        });
+      node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y)
 
-      label
-        .attr("x", function (d: any) {
-          return d.x + 5;
-        })
-        .attr("y", function (d: any) {
-          return d.y + 5;
-        });
+      label.attr('x', (d: any) => d.x + 5).attr('y', (d: any) => d.y + 5)
     }
+
+    this.simulation.nodes(nodes).on('tick', ticked)
   }
 
   render() {
-    const { width, height, graph } = this.props;
+    const {width, height, graph} = this.props
     return (
-      <svg className="container"
-        width={width} height={height}>
+      <svg className="container" width={width} height={height}>
         <Links links={graph.links} />
         <Nodes nodes={graph.nodes} simulation={this.simulation} />
         <Labels nodes={graph.nodes} />
       </svg>
-    );
+    )
   }
 }

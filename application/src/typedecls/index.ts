@@ -1,5 +1,3 @@
-import { d3Types } from "./d3types"
+import {d3Types} from './d3types'
 
-export {
-    d3Types
-};
+export {d3Types}
