@@ -1,14 +1,14 @@
 import React from 'react'
 import * as d3 from 'd3'
-import d3Types from 'typedecls'
+import D3Types from 'typedecls'
 
 interface VerticesProps {
-  vertices: d3Types.Vertex[]
+  vertices: D3Types.Vertex[]
   simulation: any
 }
 
 interface SingleVertexProps {
-  vertex: d3Types.Vertex
+  vertex: D3Types.Vertex
   color: string
 }
 
@@ -32,21 +32,21 @@ export default class Vertices extends React.Component<VerticesProps, {}> {
   componentDidMount() {
     const {simulation} = this.props
     // https://stackoverflow.com/questions/44472945/d3-js-and-typescript-compilation-error/44523718#44523718
-    d3.selectAll<SVGCircleElement, d3Types.Vertex>('.vertex').call(
+    d3.selectAll<SVGCircleElement, D3Types.Vertex>('.vertex').call(
       d3
-        .drag<SVGCircleElement, d3Types.Vertex>()
-        .on('start', (d: d3Types.Vertex) => {
+        .drag<SVGCircleElement, D3Types.Vertex>()
+        .on('start', (d: D3Types.Vertex) => {
           if (!d3.event.active) {
             simulation.alphaTarget(0.3).restart()
           }
           d.fx = d.x // eslint-disable-line no-param-reassign
           d.fy = d.y // eslint-disable-line no-param-reassign
         })
-        .on('drag', (d: d3Types.Vertex) => {
+        .on('drag', (d: D3Types.Vertex) => {
           d.fx = d3.event.x // eslint-disable-line no-param-reassign
           d.fy = d3.event.y // eslint-disable-line no-param-reassign
         })
-        .on('end', (d: d3Types.Vertex) => {
+        .on('end', (d: D3Types.Vertex) => {
           if (!d3.event.active) {
             simulation.alphaTarget(0)
           }
@@ -59,7 +59,7 @@ export default class Vertices extends React.Component<VerticesProps, {}> {
   render() {
     const color = d3.scaleOrdinal(d3.schemeCategory10)
     const vertices = this.props.vertices.map(
-      (vertex: d3Types.Vertex, index: number) => {
+      (vertex: D3Types.Vertex, index: number) => {
         if (typeof vertex.group === 'undefined') {
           return (
             <Vertex key={index} vertex={vertex} color={color('undefined')} />

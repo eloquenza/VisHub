@@ -1,16 +1,16 @@
 import React from 'react'
 import * as d3 from 'd3'
-import d3Types from 'typedecls'
+import D3Types from 'typedecls'
 import {Edges, Vertices, Labels} from 'components'
 
 interface AppProps {
   width: number
   height: number
-  graph: d3Types.Graph
+  graph: D3Types.Graph
 }
 
 export default class App extends React.Component<AppProps, {}> {
-  simulation: d3.Simulation<d3Types.Vertex, d3Types.Edge>
+  simulation: d3.Simulation<D3Types.Vertex, D3Types.Edge>
 
   constructor(props: AppProps) {
     super(props)
@@ -22,7 +22,7 @@ export default class App extends React.Component<AppProps, {}> {
         'link',
         d3
           .forceLink(graph.edges)
-          .id((d: d3Types.Vertex) => {
+          .id((d: D3Types.Vertex) => {
             return typeof d.id === 'undefined' ? 'undefined' : d.id
           })
           .strength(0.3)

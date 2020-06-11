@@ -1,13 +1,13 @@
 import React from 'react'
 import * as d3 from 'd3'
-import d3Types from 'typedecls'
+import D3Types from 'typedecls'
 
 interface LabelsProps {
-  vertices: d3Types.Vertex[]
+  vertices: D3Types.Vertex[]
 }
 
 interface SingleLabelProps {
-  vertex: d3Types.Vertex
+  vertex: D3Types.Vertex
 }
 
 class Label extends React.Component<SingleLabelProps, {}> {
@@ -28,7 +28,7 @@ class Label extends React.Component<SingleLabelProps, {}> {
 
 function Labels({vertices}: LabelsProps) {
   const labelComponents = vertices.map(
-    (vertex: d3Types.Vertex, index: number) => (
+    (vertex: D3Types.Vertex, index: number) => (
       <Label key={index} vertex={vertex} />
     )
   )

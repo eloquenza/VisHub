@@ -1,13 +1,13 @@
 import React from 'react'
 import * as d3 from 'd3'
-import d3Types from 'typedecls'
+import D3Types from 'typedecls'
 
 interface EdgesProps {
-  edges: d3Types.Edge[]
+  edges: D3Types.Edge[]
 }
 
 interface SingleEdgeProps {
-  edge: d3Types.Edge
+  edge: D3Types.Edge
 }
 
 class Edge extends React.Component<SingleEdgeProps, {}> {
@@ -26,7 +26,7 @@ class Edge extends React.Component<SingleEdgeProps, {}> {
 }
 
 function Edges({edges}: EdgesProps) {
-  const edgeComponents = edges.map((edge: d3Types.Edge, index: number) => (
+  const edgeComponents = edges.map((edge: D3Types.Edge, index: number) => (
     <Edge key={index} edge={edge} />
   ))
 
