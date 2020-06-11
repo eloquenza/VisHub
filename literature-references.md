@@ -31,6 +31,7 @@ Newer versions seem to be based on GraphQL:
 
 ### Style guide
 
+[Google's Typescript style guide](https://github.com/google/gts)
 [Airbnb's React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming)
 
 ## Ideas
