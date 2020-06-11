@@ -14,6 +14,8 @@ cd application/
 # This step installs all dependencies - some of these are already handled by the create react-app step but are here listed for completeness
 # create react-app installs these as dependencies instead of devDependencies which does not seem to matter, see https://github.com/facebook/create-react-app/issues/6180
 yarn add typescript @types/node @types/react @types/react-dom @types/jest @types/d3 @types/react-router-dom @types/styled-components d3 react react-dom react-router-dom tslib ts-enum-util
+
+yarn add --dev eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier gts
 ```
 
 ## Available commands for development / deployment

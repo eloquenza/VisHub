@@ -25,10 +25,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "eject": "react-scripts eject",
+    "dry-lint": "eslint --fix-dry-run --ext .tsx src/",
+    "lint": "eslint --ext .tsx --ext .ts src/",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "prepare": "yarn run compile",
+    "pretest": "yarn run compile",
+    "posttest": "yarn run check"
   },
   "browserslist": {
     "production": [
@@ -41,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "gts": "^2.0.2",
+    "prettier": "^2.0.5"
   }
 }

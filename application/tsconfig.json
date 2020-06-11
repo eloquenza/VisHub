@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "lib": [
       "dom",
       "dom.iterable",
@@ -16,22 +16,33 @@
     // programming / code style guides related settings
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "noFallthroughCasesInSwitch": true,
-    "allowJs": true,
-    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "allowJs": false,
+    "skipLibCheck": false,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "declaration": true,
     // development / project setup related settigns
+    "outDir": "build",
+    "rootDir": ".",
     "baseUrl": "./src",
     "noEmit": true,
+    "noEmitOnError": true,
     "sourceMap": true, // enables to display original TS code in debugging
     // jsx/react related settings
-    "jsx": "react",
+    "jsx": "react"
   },
   "include": [
-    "src"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "test/**/*.ts",
   ],
   "exclude": [
+    "test/fixtures/**/*.*",
+    "template/**/*.*",
     "node_modules",
     "build",
     "scripts"
