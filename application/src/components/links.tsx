@@ -20,8 +20,7 @@ class Link extends React.Component<SingleLinkProps, {}> {
   }
 
   render() {
-    return <line className="link" ref={this.ref}
-      strokeWidth={Math.sqrt(this.props.link.value)} />;
+    return <line className="link" ref={this.ref} />;
   }
 }
 
