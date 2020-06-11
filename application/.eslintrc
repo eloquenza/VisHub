@@ -1,26 +1,47 @@
 {
     "extends": [
-      "./node_modules/gts",
-      "react-app",
-      "airbnb",
-      "plugin:jsx-a11y/recommended",
-      "prettier",
-      "prettier/react"
+        "./node_modules/gts",
+        "react-app",
+        "airbnb",
+        "plugin:jsx-a11y/recommended",
+        "prettier",
+        "prettier/react"
     ],
     "plugins": [
-      "jsx-a11y",
-      "prettier"
+        "jsx-a11y",
+        "prettier"
     ],
     "rules": {
-      "lines-between-class-members" : ["error", "always", {"exceptAfterSingleLine": true} ],
-      "semi": 0,
-      "react/jsx-filename-extension": [1,
+        // the next 3 rules are disabled because eslint reported errors
+        // while the Typescript compiler had no issue to resolve these
+        // modules. To disable the clutter, I am disabling these rules.
+        "import/extensions": 0,
+        "import/no-unresolved": 0,
+        // Having a max amount of classes seems wasteful to me
+        // This rather feels like a rule for Java
+        "max-classes-per-file": 0,
+        // This is disabled because destructuring props in multiple
+        // methods where only one direct property from props is needed
+        // seems rather wasteful and adds unnecessary clutter
+        "react/destructuring-assignment": 1,
+        // Because of a mismatch between this and prettier/prettier rules
+        // linting either forces me to have semicolons or none.
+        // Because of completeness, unity and clarity I choose to have none.
+        "@typescript-eslint/member-delimiter-style": 0,
+        "lines-between-class-members" : [
+            "error",
+            "always",
+            {"exceptAfterSingleLine": true}
+        ],
+        "semi": 0,
+        "react/jsx-filename-extension": [
+            1,
             { "extensions": [".ts", ".tsx"] }
         ],
-      "prettier/prettier": [
-        "error", {
-          "semi": false
-        }
-      ]
+        "prettier/prettier": [
+            "error", {
+                "semi": false
+            }
+        ]
     }
   }
