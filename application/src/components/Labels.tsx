@@ -1,6 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3'
 import D3Types from 'typedecls'
+import generateReactKey from 'utils/reactKeyGeneration'
 
 interface LabelsProps {
   vertices: D3Types.Vertex[]
@@ -29,7 +30,7 @@ class Label extends React.Component<SingleLabelProps, {}> {
 function Labels({vertices}: LabelsProps) {
   const labelComponents = vertices.map(
     (vertex: D3Types.Vertex, index: number) => (
-      <Label key={index} vertex={vertex} />
+      <Label key={generateReactKey(vertices, index)} vertex={vertex} />
     )
   )
 

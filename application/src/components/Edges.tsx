@@ -1,6 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3'
 import D3Types from 'typedecls'
+import generateReactKey from 'utils/reactKeyGeneration'
 
 interface EdgesProps {
   edges: D3Types.Edge[]
@@ -27,7 +28,7 @@ class Edge extends React.Component<SingleEdgeProps, {}> {
 
 function Edges({edges}: EdgesProps) {
   const edgeComponents = edges.map((edge: D3Types.Edge, index: number) => (
-    <Edge key={index} edge={edge} />
+    <Edge key={generateReactKey(edges, index)} edge={edge} />
   ))
 
   return <g className="edges">{edgeComponents}</g>

@@ -1,6 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3'
 import D3Types from 'typedecls'
+import generateReactKey from 'utils/reactKeyGeneration'
 
 interface VerticesProps {
   vertices: D3Types.Vertex[]
@@ -62,12 +63,16 @@ export default class Vertices extends React.Component<VerticesProps, {}> {
       (vertex: D3Types.Vertex, index: number) => {
         if (typeof vertex.group === 'undefined') {
           return (
-            <Vertex key={index} vertex={vertex} color={color('undefined')} />
+            <Vertex
+              key={generateReactKey(this.props.vertices, index)}
+              vertex={vertex}
+              color={color('undefined')}
+            />
           )
         }
         return (
           <Vertex
-            key={index}
+            key={generateReactKey(this.props.vertices, index)}
             vertex={vertex}
             color={color(vertex.group.toString())}
           />
