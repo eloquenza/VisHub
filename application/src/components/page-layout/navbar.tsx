@@ -29,7 +29,7 @@ const NavLinkStyled: FunctionComponent<NavLinkProps> = ({
   exact,
   children,
 }: NavLinkProps) => (
-  <NavLink {...exact} to={to} className={styles.navLink}>
+  <NavLink exact={exact} to={to} className={styles.navLink}>
     {children}
   </NavLink>
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TestComponent()  {
+function TestComponent() {
   return (
     <div>
       <h1>Hello TestComponent</h1>
