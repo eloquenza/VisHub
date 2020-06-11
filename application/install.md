@@ -11,7 +11,7 @@ yarn create react-app vishub --template typescript
 mv vishub/ application/
 cd application/
 
-# This step just lists all dependencies - some of these are already handled by the create react-app step
+# This step installs all dependencies - some of these are already handled by the create react-app step but are here listed for completeness
 # create react-app installs these as dependencies instead of devDependencies which does not seem to matter, see https://github.com/facebook/create-react-app/issues/6180
 yarn add --dev typescript @types/node @types/react @types/react-dom @types/jest @types/d3
 
