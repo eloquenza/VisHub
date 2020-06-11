@@ -56,14 +56,12 @@ const routes = Object.values<RouteObject>(routesMap).map(
   }
 )
 
-class NavBar extends React.Component<{}, {}> {
-  render() {
-    return (
-      <nav className={styles.nav}>
-        <ul className={styles.ul}>{routes}</ul>
-      </nav>
-    )
-  }
+function NavBar() {
+  return (
+    <nav className={styles.nav}>
+      <ul className={styles.ul}>{routes}</ul>
+    </nav>
+  )
 }
 
 export default NavBar
