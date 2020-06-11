@@ -12,6 +12,7 @@
       "prettier"
     ],
     "rules": {
+      "lines-between-class-members" : ["error", "always", {"exceptAfterSingleLine": true} ],
       "semi": 0,
       "react/jsx-filename-extension": [1,
             { "extensions": [".ts", ".tsx"] }
