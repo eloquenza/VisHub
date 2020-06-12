@@ -19,8 +19,8 @@ ReactDOM.render(
         <Route exact path={['/home', '/users', '/']}>
           {/* The declared components inside a Route are the ones that will be rendered when said Route is matched */}
           <Users
-            width={window.screen.availWidth}
-            height={window.screen.availHeight}
+            width={window.innerWidth}
+            height={window.innerHeight}
             graph={data}
           />
         </Route>
