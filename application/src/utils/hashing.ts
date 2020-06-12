@@ -1,3 +1,5 @@
+// extracted from https://gist.github.com/ansemjo/13ab7315878f23bd92264d380ad79af8
+
 import * as UUID from 'uuid'
 import crypto from 'crypto'
 import stringify from 'json-stable-stringify'

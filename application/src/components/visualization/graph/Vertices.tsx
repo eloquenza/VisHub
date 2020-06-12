@@ -1,6 +1,6 @@
 import React from 'react'
 import * as d3 from 'd3'
-import D3Types from 'typedecls'
+import {D3Types} from 'typedecls'
 import generateReactKey from 'utils/reactKeyGeneration'
 
 interface VerticesProps {

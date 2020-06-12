@@ -1,8 +1,4 @@
-import Edges from './Edges'
-import Vertices from './Vertices'
-import Labels from './Labels'
-import TestComponent from './TestComponent'
-import App from './App'
-import NavBar from './page-layout/NavBar'
+import {Edges, Vertices, Labels} from './visualization/graph'
+import {Events, Languages, NavBar, Repos, Users} from './layout'
 
-export {Edges, Vertices, Labels, TestComponent, NavBar, App}
+export {Edges, Vertices, Labels, Events, Languages, NavBar, Repos, Users}
