@@ -74,7 +74,7 @@ export default class Vertices extends React.Component<VerticesProps, {}> {
         if (typeof vertex.group === 'undefined') {
           return (
             <Vertex
-              key={generateReactKey(this.props.vertices, index)}
+              key={generateReactKey('vertices', index)}
               vertex={vertex}
               color={color('undefined')}
             />
@@ -82,7 +82,7 @@ export default class Vertices extends React.Component<VerticesProps, {}> {
         }
         return (
           <Vertex
-            key={generateReactKey(this.props.vertices, index)}
+            key={generateReactKey('vertices', index)}
             vertex={vertex}
             color={color(vertex.group.toString())}
           />

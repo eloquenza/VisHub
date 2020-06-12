@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import styles from 'styles/navbar.module.css'
 import {RouteObject, RouteNames, routesMap} from 'configs/routes'
 import {ReactTypes} from 'typedecls'
+import generateReactKey from 'utils/reactKeyGeneration'
 
 /// ////////////
 // helper functions to reduce duplicate code of applied css styles
@@ -35,11 +36,11 @@ const NavLinkStyled: FunctionComponent<NavLinkProps> = ({
 
 // Procedurally create all navigation bar elements from the routesMap
 const routes = Object.values<RouteObject>(routesMap).map(
-  ({path, visibleName}) => {
+  ({path, visibleName}, index) => {
     switch (visibleName) {
       case RouteNames[RouteNames.Vishub]:
         return (
-          <PageName>
+          <PageName key={generateReactKey('routesMap', index)}>
             <NavLinkStyled exact to={path}>
               {visibleName}
             </NavLinkStyled>
@@ -47,7 +48,7 @@ const routes = Object.values<RouteObject>(routesMap).map(
         )
       default:
         return (
-          <NavElement>
+          <NavElement key={generateReactKey('routesMap', index)}>
             <NavLinkStyled to={path}>{visibleName}</NavLinkStyled>
           </NavElement>
         )

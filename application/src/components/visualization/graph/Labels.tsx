@@ -38,7 +38,7 @@ class Label extends React.Component<SingleLabelProps, {}> {
 function Labels({vertices}: LabelsProps) {
   const labelComponents = vertices.map(
     (vertex: D3Types.Vertex, index: number) => (
-      <Label key={generateReactKey(vertices, index)} vertex={vertex} />
+      <Label key={generateReactKey('labels', index)} vertex={vertex} />
     )
   )
 
