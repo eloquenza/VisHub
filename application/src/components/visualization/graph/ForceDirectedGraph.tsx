@@ -3,16 +3,19 @@ import * as d3 from 'd3'
 import {D3Types} from 'typedecls'
 import {Edges, Vertices, Labels} from 'components'
 
-interface UsersProps {
+interface ForceDirectedGraphProps {
   width: number
   height: number
   graph: D3Types.Graph
 }
 
-export default class Users extends React.Component<UsersProps, {}> {
+export default class ForceDirectedGraph extends React.Component<
+  ForceDirectedGraphProps,
+  {}
+> {
   simulation: d3.Simulation<D3Types.Vertex, D3Types.Edge>
 
-  constructor(props: UsersProps) {
+  constructor(props: ForceDirectedGraphProps) {
     super(props)
 
     const {width, height, graph} = props

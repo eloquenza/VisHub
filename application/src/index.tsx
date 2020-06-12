@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import './styles/index.css'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import {NavBar, Users, Repos, Events, Languages} from 'components'
-import data from './miserables'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,11 +17,7 @@ ReactDOM.render(
         {/* exact avoids the aforementioned problem and lets a route only be matched if the current URL matches the declared path directly */}
         <Route exact path={['/home', '/users', '/']}>
           {/* The declared components inside a Route are the ones that will be rendered when said Route is matched */}
-          <Users
-            width={window.innerWidth}
-            height={window.innerHeight}
-            graph={data}
-          />
+          <Users />
         </Route>
         <Route path="/repos">
           <Repos />

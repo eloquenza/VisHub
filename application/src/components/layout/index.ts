@@ -1,7 +1,4 @@
-import Events from './Events'
-import Languages from './Languages'
 import NavBar from './NavBar'
-import Repos from './Repos'
-import Users from './Users'
+import AuthorNetwork from './AuthorNetwork'
 
-export {Events, Languages, NavBar, Repos, Users}
+export {NavBar, AuthorNetwork}
