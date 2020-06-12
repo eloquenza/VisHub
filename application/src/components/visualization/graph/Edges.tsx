@@ -12,17 +12,27 @@ interface SingleEdgeProps {
 }
 
 class Edge extends React.Component<SingleEdgeProps, {}> {
-  readonly ref: React.RefObject<SVGLineElement> = React.createRef()
+  // Note the definite assignment operator `!` to relay to Typescript
+  // that this variable has definitely been assigned for all
+  // intents and purposes
+  ref!: SVGLineElement
 
   componentDidMount() {
-    d3.select(this.ref.current)
+    d3.select(this.ref)
       .data([this.props.edge])
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
   }
 
   render() {
-    return <line className="edge" ref={this.ref} />
+    return (
+      <line
+        className="edge"
+        ref={(ref: SVGLineElement) => {
+          this.ref = ref
+        }}
+      />
+    )
   }
 }
 

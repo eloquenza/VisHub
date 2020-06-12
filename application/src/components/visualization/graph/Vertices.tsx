@@ -14,15 +14,25 @@ interface SingleVertexProps {
 }
 
 class Vertex extends React.Component<SingleVertexProps, {}> {
-  readonly ref: React.RefObject<SVGCircleElement> = React.createRef()
+  // Note the definite assignment operator `!` to relay to Typescript
+  // that this variable has definitely been assigned for all
+  // intents and purposes
+  ref!: SVGCircleElement
 
   componentDidMount() {
-    d3.select(this.ref.current).data([this.props.vertex])
+    d3.select(this.ref).data([this.props.vertex])
   }
 
   render() {
     return (
-      <circle className="vertex" r={5} fill={this.props.color} ref={this.ref}>
+      <circle
+        className="vertex"
+        r={5}
+        fill={this.props.color}
+        ref={(ref: SVGCircleElement) => {
+          this.ref = ref
+        }}
+      >
         <title>{this.props.vertex.id}</title>
       </circle>
     )
