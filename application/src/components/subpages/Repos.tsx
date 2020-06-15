@@ -1,11 +1,7 @@
 import React from 'react'
 
 function Repos() {
-  return (
-    <div>
-      <h1>Hello Repos</h1>
-    </div>
-  )
+  return <h1>HALLO HSUSOSSDKASLDJKLASDJl</h1>
 }
 
 export default Repos

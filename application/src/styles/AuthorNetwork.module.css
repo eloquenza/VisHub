@@ -1,0 +1,15 @@
+.authorNetworkContainer {
+    border: 2px solid black;
+    position: relative;
+    overflow: hidden;
+}
+
+.authorNetworkMenuBar {
+    color: white;
+    background: hsl(210,12.2%,16.1%);
+    padding: 5px 5px;
+}
+
+.authorNetworkRadioButtons {
+
+}

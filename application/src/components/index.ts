@@ -1,21 +1,14 @@
-import {
-  Edges,
-  Vertices,
-  Labels,
-  ForceDirectedGraph,
-} from './visualization/graph'
+import {EdgeBundling, ForceDirectedGraph} from './visualizations'
 import {Events, Languages, Repos, Users} from './subpages'
 import {NavBar, AuthorNetwork} from './layout'
 
 export {
-  Edges,
-  Vertices,
-  Labels,
   Events,
   Languages,
   NavBar,
   Repos,
   Users,
+  EdgeBundling,
   ForceDirectedGraph,
   AuthorNetwork,
 }

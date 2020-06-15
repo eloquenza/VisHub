@@ -1,9 +1,10 @@
 import React, {FunctionComponent} from 'react'
 import {NavLink} from 'react-router-dom'
-import styles from 'styles/navbar.module.css'
 import {RouteObject, RouteNames, routesMap} from 'configs/routes'
-import {ReactTypes} from 'typedecls'
+import {ChildrenProps} from 'typedecls/ReactPropsAndStates'
 import generateReactKey from 'utils/reactKeyGeneration'
+
+import styles from 'styles/NavBar.module.css'
 
 /// ////////////
 // helper functions to reduce duplicate code of applied css styles
@@ -11,18 +12,18 @@ import generateReactKey from 'utils/reactKeyGeneration'
 // This is called an intersection type, which combines multiple types
 // into one. Extending a type with another type is not allowed in Typescript
 // and the workaround with introducing an interface seems rather "hacky"
-type NavLinkProps = ReactTypes.ChildrenProps & {
+type NavLinkProps = ChildrenProps & {
   to: string
   exact?: boolean
 }
 
-const PageName: FunctionComponent<ReactTypes.ChildrenProps> = ({
+const PageName: FunctionComponent<ChildrenProps> = ({
   children,
-}: ReactTypes.ChildrenProps) => <li className={styles.pageName}>{children}</li>
+}: ChildrenProps) => <li className={styles.pageName}>{children}</li>
 
-const NavElement: FunctionComponent<ReactTypes.ChildrenProps> = ({
+const NavElement: FunctionComponent<ChildrenProps> = ({
   children,
-}: ReactTypes.ChildrenProps) => <li className={styles.subPages}>{children}</li>
+}: ChildrenProps) => <li className={styles.subPages}>{children}</li>
 
 const NavLinkStyled: FunctionComponent<NavLinkProps> = ({
   to,
