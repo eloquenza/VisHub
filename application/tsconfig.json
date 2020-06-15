@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "es2020",
+    "lib": ["dom", "dom.iterable", "es2020"],
     // module related settings
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
@@ -35,11 +31,7 @@
     // jsx/react related settings
     "jsx": "react"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "test/**/*.ts",
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts"],
   "exclude": [
     "test/fixtures/**/*.*",
     "template/**/*.*",
