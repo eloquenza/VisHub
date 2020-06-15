@@ -69,3 +69,17 @@ Newer versions seem to be based on GraphQL:
 [Using D3 and React Together to Make Visualizations in TypeScript](https://spin.atomicobject.com/2017/07/20/d3-react-typescript/)
 This one is pretty outdated but a good starter.
 I adapted this one as a base for this project, and had to fix many errors that occured due to the use of older versions of TypeScript, React and D3.
+
+#### D3 and React - Consideration about interoperability
+
+[D3 within React the right way](https://oli.me.uk/d3-within-react-the-right-way/):
+Essentially uses a (second) virtual DOM, seems fine, but limit's us to React's animations - which I am not too familiar with.
+
+[Bringing Together React, D3, And Their Ecosystem](https://www.smashingmagazine.com/2018/02/react-d3-ecosystem/)
+Discusses a lot of possibilities, esp. their advantages and disadvantages, and interoperability between their ecosystems.
+The simplest method, the one I am using currently, i.e. in commit 7eadba35943b54dffc3374998e43f5cf132f3cf2, let's D3 handle all DOM-related operations, but results in a poor experience considering React. Also this does not render server-side, which should be of no concern to me currently, but is, if I somehow, want to release this on my website (for fun or any other reason)
+The "best" approach he discusses makes it so that React has full control over the DOM, which also means that all shapes and animations have to be implemented in React and not D3, which seems like a huge amount of work that I would only deem necessary in a professional production environment.
+The third approach is something that already seems like mine, the discussion of that follows in the following literature reference
+
+[Integrating D3.js visualizations in a React app](https://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/)
+I like the approach, because it moves the DOM manipulation strictly to D3 which makes it so that 2 libraries do not manipulate the same DOM at the same time.
