@@ -66,6 +66,9 @@ export function bilinks(root: EdgeBundlingNode) {
         node.outgoing.push(newEdge)
       }
     })
+  })
+
+  root.leaves().forEach(node => {
     node.outgoing.map(outgoingEdge => {
       outgoingEdge.target.incoming.push(outgoingEdge)
     })
