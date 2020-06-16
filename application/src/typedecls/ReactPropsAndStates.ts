@@ -35,10 +35,6 @@ export interface ChartState {
 export interface GraphProps {
   window: ContainerDimensions
   containerClassName: string
-  loadData: () => Graph | EdgeBundlingNode
-  graphFactory: D3Graph<Vertex | EdgeBundlingNode>
-}
-
-export interface GraphState {
   data: Graph | EdgeBundlingNode
+  graphFactory: D3Graph<Vertex | EdgeBundlingNode>
 }

@@ -1,9 +1,8 @@
-import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
+import {GraphProps} from 'typedecls/ReactPropsAndStates'
 import {Graph, Vertex, Edge} from 'typedecls/D3Types'
 import * as d3 from 'd3'
 
 import {ClassElementNames} from 'appConstants'
-import {highlightIncidentForceEdges} from 'utils/d3UtilityFunctions'
 import {D3Graph} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 
@@ -18,10 +17,12 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     )
   }
 
-  create(documentElement: Element, props: GraphProps, state: GraphState): void {
+  create(documentElement: Element, props: GraphProps, state: any): void {
     const {width, height} = props.window
-    const graph = state.data as Graph
+    const graph = props.data as Graph
     const {vertices, edges} = graph
+
+    console.log(state)
 
     const simulation = this.createSimulation(graph, width, height)
     const parentSVG = this.styleSVG(documentElement, props)
@@ -62,17 +63,12 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     simulation: d3.Simulation<Vertex, Edge>,
     vertices: Vertex[]
   ) {
-    console.log(typeof parentSVG)
-    console.log(parentSVG)
-    console.log("Logging vertices")
-    console.log(vertices)
-    const circles = parentSVG
+    parentSVG
       .append('g')
+      .classed('vertices', true)
       .selectAll(ClassElementNames.svgCircleElementName)
       .data(vertices)
       .join(ClassElementNames.svgCircleElementName)
-    console.log(circles)
-    circles
       .attr('r', 5)
       .classed(ClassElementNames.forceVerticesClassName, true)
       .on('mouseover', this.highlightSelectedVertex)
@@ -110,12 +106,14 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   ) {
     parentSVG
       .append('g')
+      .classed('edges', true)
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
       .selectAll(ClassElementNames.svgLineElementName)
       .data(edges)
       .join(ClassElementNames.svgLineElementName)
       .classed(ClassElementNames.forceEdgesClassName, true)
+      .attr('pointer-events', 'none')
       .attr('stroke-width', d => Math.sqrt(d.value))
   }
 
@@ -125,10 +123,12 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   ) {
     parentSVG
       .append('g')
+      .classed('labels', true)
       .selectAll(ClassElementNames.svgTextElementName)
       .data(vertices)
       .join(ClassElementNames.svgTextElementName)
       .classed(ClassElementNames.forceLabelsClassName, true)
+      .attr('pointer-events', 'none')
       .text(d => d.id || 'undefined')
   }
 
@@ -148,14 +148,8 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .attr('y', (d: any) => d.y + 5)
   }
 
-  update(documentElement: Element, props: GraphProps, state: GraphState): void {
+  update(documentElement: Element, props: GraphProps, state: any): void {
     console.log(documentElement, props, state)
-    throw new Error('Method not implemented.')
-  }
-
-  destroy(documentElement: Element): void {
-    console.log(documentElement)
-    throw new Error('Method not implemented.')
   }
 
   highlightSelectedVertex(selectedVertex: Vertex): void {
@@ -165,4 +159,22 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   dehighlightSelectedVertex(selectedVertex: Vertex): void {
     highlightIncidentForceEdges(selectedVertex, '#999', 0.6)
   }
+}
+
+function highlightIncidentForceEdges(
+  selectedVertex: Vertex,
+  color: string,
+  opacity: number
+) {
+  d3.selectAll<SVGLineElement, Edge>(
+    `.${ClassElementNames.forceEdgesClassName}`
+  ).each((edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => {
+    const source = edge.source as Vertex
+    const target = edge.target as Vertex
+    if (source.id === selectedVertex.id || target.id === selectedVertex.id) {
+      d3.select(nodes[index])
+        .attr('stroke', color)
+        .attr('stroke-opacity', opacity)
+    }
+  })
 }

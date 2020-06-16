@@ -1,4 +1,4 @@
 import Chart from './Chart'
-import GraphComponent from './Graph'
+import GraphComponent from './GraphComponent'
 
 export {Chart, GraphComponent}

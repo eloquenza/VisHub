@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 import {SVGCSSAttribute} from 'typedecls/CssStyleTypes'
 import {EdgeBundlingNode, NodeElem, EdgeBundlingEdge} from 'typedecls/D3Types'
-import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
+import {GraphProps} from 'typedecls/ReactPropsAndStates'
 
 import {Colors, ClassElementNames} from 'appConstants'
 import {colorEdges, applyAttrsToSelection} from 'utils/d3UtilityFunctions'
@@ -22,9 +22,12 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     )
   }
 
-  create(documentElement: Element, props: GraphProps, state: GraphState): void {
+  create(documentElement: Element, props: GraphProps, state: any): void {
     const { width } = props.window
-    const root = state.data as EdgeBundlingNode
+    const root = props.data as EdgeBundlingNode
+
+    console.log("Inside d3edgebundling create")
+
     const cluster: d3.ClusterLayout<NodeElem> = d3
       .cluster<NodeElem>()
       .size([2 * Math.PI, width / 3])
@@ -64,6 +67,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     const gSelection = parentSVG.append('g')
     const textSelections = gSelection
       .selectAll('g')
+      .classed('vertices', true)
       .data<EdgeBundlingNode>(rootNode.leaves())
       .join<SVGGElement>('g')
       .attr(
@@ -102,8 +106,12 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     lineGenerator: d3.LineRadial<EdgeBundlingNode>,
     edges: EdgeBundlingEdge[]
   ) {
+
+    console.log("Inside d3edgebundling edges")
+    console.log(edges)
     parentSVG
       .append('g')
+      .classed('edges', true)
       .attr('stroke', Colors.colorNone)
       .attr('fill', 'none')
       .selectAll(ClassElementNames.svgPathElementName)
@@ -164,14 +172,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     )
   }
 
-
   update(documentElement: Element, props: GraphProps, state: any): void {
     console.log(documentElement, props, state)
-    throw new Error('Method not implemented.')
-  }
-
-  destroy(documentElement: Element): void {
-    console.log(documentElement)
-    throw new Error('Method not implemented.')
   }
 }

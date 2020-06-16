@@ -1,7 +1,6 @@
 import React from 'react'
 import * as d3 from 'd3'
 
-import { GraphComponent } from 'components'
 import {Vertex, EdgeBundlingNode} from 'typedecls/D3Types'
 import {transformGraphIntoTree, bilinks} from 'utils/dataTransformation'
 import {
@@ -9,22 +8,34 @@ import {
   D3ForceGraph,
   D3SearchStrategy,
 } from 'visualizationHelpers'
+import { ClassElementNames } from 'appConstants'
 
 import styles from 'styles/AuthorNetwork.module.css'
 
 import data from '../../miserables'
-import { ClassElementNames } from 'appConstants'
+import GraphComponent from 'components/visualizations/GraphComponent'
 
 interface AuthorNetworkProps {
   width: number
   height: number
 }
 
+function loadTreeRoot() {
+  const treeifiedGraph = transformGraphIntoTree(data)
+  const hierarchy = d3
+    .hierarchy(treeifiedGraph)
+    .sort((a, b) => d3.ascending(a.data.id, b.data.id)) as EdgeBundlingNode
+  return bilinks(hierarchy)
+
+}
+
+const root = loadTreeRoot()
+
 type GraphTypes = 'force' | 'edgebundling'
 type VertexType = Vertex | EdgeBundlingNode
 
 interface AuthorNetworkState {
-  graphName: GraphTypes
+  currentGraphName: GraphTypes
   searchInput: string
   networkVisualisation: React.ReactNode
   searchStrategy: D3SearchStrategy<VertexType>
@@ -41,31 +52,32 @@ export default class AuthorNetwork extends React.Component<
 
   constructor(props: AuthorNetworkProps) {
     super(props)
+
     this.forceGraphComponent = this.createForceGraphComponent()
     this.edgeBundlingGraphComponent = this.createEdgeBundlingGraph()
     this.state = {
-      graphName: 'edgebundling',
+      currentGraphName: 'force',
       searchInput: '',
-      networkVisualisation: this.edgeBundlingGraphComponent,
-      searchStrategy: this.edgeBundlingGraphFactory.searchStrategy,
+      networkVisualisation: this.forceGraphComponent,
+      searchStrategy: this.forceGraphFactory.searchStrategy,
     }
   }
 
   onRadioButtonSwitchGraph(event: React.ChangeEvent<HTMLInputElement>) {
     const graphType = event.currentTarget.value as GraphTypes
     this.setState(state => {
-      switch (state.graphName) {
+      switch (state.currentGraphName) {
         case 'force':
           return {
             networkVisualisation: this.edgeBundlingGraphComponent,
             searchStrategy: this.edgeBundlingGraphFactory.searchStrategy,
-            graphName: graphType,
+            currentGraphName: graphType,
           }
         case 'edgebundling':
           return {
             networkVisualisation: this.forceGraphComponent,
             searchStrategy: this.forceGraphFactory.searchStrategy,
-            graphName: graphType,
+            currentGraphName: graphType,
           }
       }
     })
@@ -78,31 +90,20 @@ export default class AuthorNetwork extends React.Component<
       <GraphComponent
         window={{width: window.innerWidth, height: window.innerHeight}}
         containerClassName={ClassElementNames.forceDirectedClassName}
-        loadData={
-          () => data
-        }
+        data={data}
         graphFactory={this.forceGraphFactory}
       />
     )
   }
 
   createEdgeBundlingGraph() {
-    const treeifiedGraph = transformGraphIntoTree(data)
-    const hierarchy = d3
-      .hierarchy(treeifiedGraph)
-      .sort((a, b) => d3.ascending(a.data.id, b.data.id)) as EdgeBundlingNode
-    const root = bilinks(hierarchy)
-
-
     this.edgeBundlingGraphFactory = new D3EdgeBundlingGraph(root)
 
     return (
       <GraphComponent
         window={{width: window.innerWidth, height: window.innerHeight}}
         containerClassName={ClassElementNames.edgeBundlingClassName}
-        loadData={
-          () => root
-        }
+        data={root}
         graphFactory={this.edgeBundlingGraphFactory}
       />
     )
@@ -118,6 +119,10 @@ export default class AuthorNetwork extends React.Component<
       searchInput: input,
     })
     this.searchForAuthor(input)
+  }
+
+  componentDidUpdate() {
+    console.log("authornetwork updating")
   }
 
   render() {
@@ -142,7 +147,7 @@ export default class AuthorNetwork extends React.Component<
               id="force"
               value="force"
               type="radio"
-              checked={this.state.graphName === 'force'}
+              checked={this.state.currentGraphName === 'force'}
               onChange={event => this.onRadioButtonSwitchGraph(event)}
             />
             Radial edge-bundling graph
@@ -150,7 +155,7 @@ export default class AuthorNetwork extends React.Component<
               id="edgebundling"
               value="edgebundling"
               type="radio"
-              checked={this.state.graphName === 'edgebundling'}
+              checked={this.state.currentGraphName === 'edgebundling'}
               onChange={event => this.onRadioButtonSwitchGraph(event)}
             />
           </div>

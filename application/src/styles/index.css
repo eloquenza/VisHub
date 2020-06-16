@@ -12,10 +12,6 @@ code {
     'Courier New', monospace;
 }
 
-.label {
-  pointer-events: none;
-}
-
 #mainContainer {
   padding: 0px 20px 0px 20px
 }
