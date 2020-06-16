@@ -1,4 +1,4 @@
-import {ForceDirectedGraphProps} from 'typedecls/ReactPropsAndStates'
+import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 import {Graph, Vertex, Edge} from 'typedecls/D3Types'
 import * as d3 from 'd3'
 
@@ -7,12 +7,7 @@ import {highlightIncidentForceEdges} from 'utils/d3UtilityFunctions'
 import {D3Graph} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 
-export class D3ForceGraph extends D3Graph<
-  Vertex,
-  ForceDirectedGraphProps,
-  any
-> {
-  edges!: Edge[]
+export class D3ForceGraph extends D3Graph<Vertex> {
 
   constructor() {
     super()
@@ -23,10 +18,10 @@ export class D3ForceGraph extends D3Graph<
     )
   }
 
-  create(documentElement: Element, props: ForceDirectedGraphProps, state: any): void {
-    const {width, height, graph} = props
-    const {vertices, edges} = props.graph
-    this.edges = edges
+  create(documentElement: Element, props: GraphProps, state: GraphState): void {
+    const {width, height} = props.window
+    const graph = state.data as Graph
+    const {vertices, edges} = graph
 
     const simulation = this.createSimulation(graph, width, height)
     const parentSVG = this.styleSVG(documentElement, props)
@@ -34,13 +29,12 @@ export class D3ForceGraph extends D3Graph<
     this.createEdges(parentSVG, edges)
     this.createLabels(parentSVG, vertices)
 
-    simulation.nodes(graph.vertices).on('tick', this.onTick)
-    console.log(state)
+    simulation.nodes(vertices).on('tick', this.onTick)
   }
 
 
-  styleSVG(documentElement: Element, props: ForceDirectedGraphProps) {
-    const {width, height} = props
+  styleSVG(documentElement: Element, props: GraphProps) {
+    const {width, height} = props.window
 
     return d3
       .select(documentElement)
@@ -68,13 +62,19 @@ export class D3ForceGraph extends D3Graph<
     simulation: d3.Simulation<Vertex, Edge>,
     vertices: Vertex[]
   ) {
-    parentSVG
+    console.log(typeof parentSVG)
+    console.log(parentSVG)
+    console.log("Logging vertices")
+    console.log(vertices)
+    const circles = parentSVG
       .append('g')
       .selectAll(ClassElementNames.svgCircleElementName)
       .data(vertices)
       .join(ClassElementNames.svgCircleElementName)
-      .classed(ClassElementNames.forceVerticesClassName, true)
+    console.log(circles)
+    circles
       .attr('r', 5)
+      .classed(ClassElementNames.forceVerticesClassName, true)
       .on('mouseover', this.highlightSelectedVertex)
       .on('mouseout', this.dehighlightSelectedVertex)
 
@@ -148,7 +148,7 @@ export class D3ForceGraph extends D3Graph<
       .attr('y', (d: any) => d.y + 5)
   }
 
-  update(documentElement: Element, props: ForceDirectedGraphProps, state: any): void {
+  update(documentElement: Element, props: GraphProps, state: GraphState): void {
     console.log(documentElement, props, state)
     throw new Error('Method not implemented.')
   }

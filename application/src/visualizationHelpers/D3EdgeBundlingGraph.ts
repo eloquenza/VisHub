@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 import {SVGCSSAttribute} from 'typedecls/CssStyleTypes'
 import {EdgeBundlingNode, NodeElem, EdgeBundlingEdge} from 'typedecls/D3Types'
-import {EdgeBundlingProps} from 'typedecls/ReactPropsAndStates'
+import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 
 import {Colors, ClassElementNames} from 'appConstants'
 import {colorEdges, applyAttrsToSelection} from 'utils/d3UtilityFunctions'
@@ -11,11 +11,7 @@ import {D3Graph} from './D3Graph'
 
 const edgesClassSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.edgeBundlingClassName} ${ClassElementNames.svgGElementName}.${ClassElementNames.edgeBundlingEdgesClassName}`
 
-export class D3EdgeBundlingGraph extends D3Graph<
-  EdgeBundlingNode,
-  EdgeBundlingProps,
-  any
-> {
+export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
   constructor(root: EdgeBundlingNode) {
     super()
 
@@ -26,8 +22,9 @@ export class D3EdgeBundlingGraph extends D3Graph<
     )
   }
 
-  create(documentElement: Element, props: EdgeBundlingProps, state: any): void {
-    const {width, root} = props
+  create(documentElement: Element, props: GraphProps, state: GraphState): void {
+    const { width } = props.window
+    const root = state.data as EdgeBundlingNode
     const cluster: d3.ClusterLayout<NodeElem> = d3
       .cluster<NodeElem>()
       .size([2 * Math.PI, width / 3])
@@ -50,8 +47,8 @@ export class D3EdgeBundlingGraph extends D3Graph<
     )
   }
 
-  styleSVG(documentElement: Element, props: EdgeBundlingProps) {
-    const {width} = props
+  styleSVG(documentElement: Element, props: GraphProps) {
+    const { width } = props.window
 
     return d3
       .select(documentElement)
@@ -168,7 +165,7 @@ export class D3EdgeBundlingGraph extends D3Graph<
   }
 
 
-  update(documentElement: Element, props: EdgeBundlingProps, state: any): void {
+  update(documentElement: Element, props: GraphProps, state: any): void {
     console.log(documentElement, props, state)
     throw new Error('Method not implemented.')
   }

@@ -1,8 +1,8 @@
 import React from 'react'
 import * as d3 from 'd3'
 
-import {ForceDirectedGraph, EdgeBundling} from 'components'
-import {Vertex, EdgeBundlingNode, Graph} from 'typedecls/D3Types'
+import { GraphComponent } from 'components'
+import {Vertex, EdgeBundlingNode} from 'typedecls/D3Types'
 import {transformGraphIntoTree, bilinks} from 'utils/dataTransformation'
 import {
   D3EdgeBundlingGraph,
@@ -12,10 +12,12 @@ import {
 
 import styles from 'styles/AuthorNetwork.module.css'
 
+import data from '../../miserables'
+import { ClassElementNames } from 'appConstants'
+
 interface AuthorNetworkProps {
   width: number
   height: number
-  graph: Graph
 }
 
 type GraphTypes = 'force' | 'edgebundling'
@@ -73,37 +75,41 @@ export default class AuthorNetwork extends React.Component<
     this.forceGraphFactory = new D3ForceGraph()
 
     return (
-      <ForceDirectedGraph
-        width={window.innerWidth}
-        height={window.innerHeight}
-        graph={this.props.graph}
+      <GraphComponent
+        window={{width: window.innerWidth, height: window.innerHeight}}
+        containerClassName={ClassElementNames.forceDirectedClassName}
+        loadData={
+          () => data
+        }
         graphFactory={this.forceGraphFactory}
       />
     )
   }
 
   createEdgeBundlingGraph() {
-    const treeifiedGraph = transformGraphIntoTree(this.props.graph)
+    const treeifiedGraph = transformGraphIntoTree(data)
     const hierarchy = d3
       .hierarchy(treeifiedGraph)
       .sort((a, b) => d3.ascending(a.data.id, b.data.id)) as EdgeBundlingNode
-
     const root = bilinks(hierarchy)
+
 
     this.edgeBundlingGraphFactory = new D3EdgeBundlingGraph(root)
 
     return (
-      <EdgeBundling
-        width={window.innerWidth}
-        height={window.innerHeight}
-        root={root}
+      <GraphComponent
+        window={{width: window.innerWidth, height: window.innerHeight}}
+        containerClassName={ClassElementNames.edgeBundlingClassName}
+        loadData={
+          () => root
+        }
         graphFactory={this.edgeBundlingGraphFactory}
       />
     )
   }
 
   searchForAuthor(searchTerm: string) {
-    this.state.searchStrategy.search(this.props.graph.vertices, searchTerm)
+    this.state.searchStrategy.search(data.vertices, searchTerm)
   }
 
   searchBarOnChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -115,7 +121,7 @@ export default class AuthorNetwork extends React.Component<
   }
 
   render() {
-    const verticesForSelection = this.props.graph.vertices.map(vertex => (
+    const verticesForSelection = data.vertices.map(vertex => (
       <option value={vertex.id} />
     ))
 

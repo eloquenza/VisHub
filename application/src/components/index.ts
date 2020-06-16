@@ -1,4 +1,4 @@
-import {EdgeBundling, ForceDirectedGraph} from './visualizations'
+import {GraphComponent, Chart} from './visualizations'
 import {Events, Languages, Repos, Users} from './subpages'
 import {NavBar, AuthorNetwork} from './layout'
 
@@ -8,7 +8,7 @@ export {
   NavBar,
   Repos,
   Users,
-  EdgeBundling,
-  ForceDirectedGraph,
+  GraphComponent,
+  Chart,
   AuthorNetwork,
 }

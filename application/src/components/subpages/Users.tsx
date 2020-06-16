@@ -2,7 +2,6 @@ import React from 'react'
 import {AuthorNetwork} from 'components'
 import {Chart} from 'components/visualizations'
 import {Box} from 'rebass'
-import data from '../../miserables'
 
 function Users() {
   return (
@@ -10,7 +9,6 @@ function Users() {
       <AuthorNetwork
         width={window.innerWidth}
         height={window.innerHeight}
-        graph={data}
       />
       <Box
         sx={{

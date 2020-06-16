@@ -1,5 +1,4 @@
-import ForceDirectedGraph from './ForceDirectedGraph'
-import EdgeBundling from './EdgeBundling'
 import Chart from './Chart'
+import GraphComponent from './Graph'
 
-export {EdgeBundling, ForceDirectedGraph, Chart}
+export {Chart, GraphComponent}
