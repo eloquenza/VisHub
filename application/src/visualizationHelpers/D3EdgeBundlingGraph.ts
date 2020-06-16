@@ -26,7 +26,7 @@ export class D3EdgeBundlingGraph extends D3Graph<
     )
   }
 
-  create(selection: Element, props: EdgeBundlingProps, state: any): void {
+  create(documentElement: Element, props: EdgeBundlingProps, state: any): void {
     const {width, root} = props
     const cluster: d3.ClusterLayout<NodeElem> = d3
       .cluster<NodeElem>()
@@ -40,7 +40,7 @@ export class D3EdgeBundlingGraph extends D3Graph<
 
     console.log(state)
 
-    const svg = this.styleSVG(selection, props)
+    const svg = this.styleSVG(documentElement, props)
     this.createVertices(svg, (rootNode as unknown) as EdgeBundlingNode)
     // creating the edges once via either incoming or outgoing is enough.
     this.createEdges(
@@ -50,11 +50,11 @@ export class D3EdgeBundlingGraph extends D3Graph<
     )
   }
 
-  styleSVG(selection: Element, props: EdgeBundlingProps) {
+  styleSVG(documentElement: Element, props: EdgeBundlingProps) {
     const {width} = props
 
     return d3
-      .select(selection)
+      .select(documentElement)
       .attr('viewBox', `${-width / 2}, ${-width / 2}, ${width}, ${width}`)
       .classed('svg-content-responsive', true)
       .attr('preserveAspectRatio', 'xMidYMid meet')
@@ -167,11 +167,14 @@ export class D3EdgeBundlingGraph extends D3Graph<
     )
   }
 
-  update(): void {
+
+  update(documentElement: Element, props: EdgeBundlingProps, state: any): void {
+    console.log(documentElement, props, state)
     throw new Error('Method not implemented.')
   }
 
-  destroy(): void {
+  destroy(documentElement: Element): void {
+    console.log(documentElement)
     throw new Error('Method not implemented.')
   }
 }

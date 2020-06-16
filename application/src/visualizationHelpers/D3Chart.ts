@@ -5,26 +5,16 @@ import {ChartDatum} from 'typedecls/D3Types'
 import {D3VisLifeCycle} from './D3VisLifeCycle'
 
 export class D3Chart implements D3VisLifeCycle<ChartProps, ChartState> {
-  create(selection: Element, props: ChartProps, state: ChartState): void {
+  create(documentElement: Element, props: ChartProps, state: ChartState): void {
     const {window} = props
-    const {data} = state
-    const margin: Margin = {top: 20, right: 30, bottom: 30, left: 40}
+    this.styleSVG(documentElement, window)
 
-    const svg = this.createSVG(selection, window)
-
-    const scales = this.createScales(margin, window, data)
-    const axes = this.createAxes(margin, window, scales.yScale, scales.xScale)
-    const lineGenerator = this.createLineGenerator(scales.yScale, scales.xScale)
-
-    svg.append('g').call(axes.y)
-    svg.append('g').call(axes.x)
-
-    this.createPaths(svg, lineGenerator, data)
+    this.update(documentElement, props, state)
   }
 
-  createSVG(selection: Element, windowDims: ContainerDimensions) {
+  styleSVG(documentElement: Element, windowDims: ContainerDimensions) {
     return d3
-      .select(selection)
+      .select(documentElement)
       .attr('viewBox', `0 0 ${windowDims.width} ${windowDims.height}`)
   }
 
@@ -108,11 +98,24 @@ export class D3Chart implements D3VisLifeCycle<ChartProps, ChartState> {
       .attr('d', lineGenerator)
   }
 
-  update(): void {
-    throw new Error('Method not implemented.')
+  update(documentElement: Element, props: ChartProps, state: ChartState): void {
+    const {data} = state
+    const {window} = props
+    const margin: Margin = {top: 20, right: 30, bottom: 30, left: 40}
+
+    const svg = d3.select(documentElement)
+    const scales = this.createScales(margin, window, data)
+    const axes = this.createAxes(margin, window, scales.yScale, scales.xScale)
+    const lineGenerator = this.createLineGenerator(scales.yScale, scales.xScale)
+
+    svg.append('g').call(axes.y)
+    svg.append('g').call(axes.x)
+
+    this.createPaths(svg, lineGenerator, data)
   }
 
-  destroy(): void {
+  destroy(documentElement: Element): void {
+    console.log(documentElement)
     throw new Error('Method not implemented.')
   }
 }

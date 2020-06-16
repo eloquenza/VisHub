@@ -19,6 +19,14 @@ export default class Chart extends React.Component<ChartProps, ChartState> {
     this.chart.create(this.ref, this.props, this.state)
   }
 
+  componentDidUpdate() {
+    this.chart.update(this.ref, this.props, this.state)
+  }
+
+  componentWillUnmount() {
+    this.chart.destroy(this.ref)
+  }
+
   render() {
     const {window} = this.props
     return (

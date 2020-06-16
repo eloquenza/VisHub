@@ -23,13 +23,13 @@ export class D3ForceGraph extends D3Graph<
     )
   }
 
-  create(selection: Element, props: ForceDirectedGraphProps, state: any): void {
+  create(documentElement: Element, props: ForceDirectedGraphProps, state: any): void {
     const {width, height, graph} = props
     const {vertices, edges} = props.graph
     this.edges = edges
 
     const simulation = this.createSimulation(graph, width, height)
-    const parentSVG = this.styleSVG(selection, props)
+    const parentSVG = this.styleSVG(documentElement, props)
     this.createVertices(parentSVG, simulation, vertices)
     this.createEdges(parentSVG, edges)
     this.createLabels(parentSVG, vertices)
@@ -38,11 +38,12 @@ export class D3ForceGraph extends D3Graph<
     console.log(state)
   }
 
-  styleSVG(selection: Element, props: ForceDirectedGraphProps) {
+
+  styleSVG(documentElement: Element, props: ForceDirectedGraphProps) {
     const {width, height} = props
 
     return d3
-      .select(selection)
+      .select(documentElement)
       .attr('viewBox', `0 0 ${width} ${height}`)
       .classed('svg-content-responsive', true)
       .attr('preserveAspectRatio', 'xMidYMid meet')
@@ -147,11 +148,13 @@ export class D3ForceGraph extends D3Graph<
       .attr('y', (d: any) => d.y + 5)
   }
 
-  update(): void {
+  update(documentElement: Element, props: ForceDirectedGraphProps, state: any): void {
+    console.log(documentElement, props, state)
     throw new Error('Method not implemented.')
   }
 
-  destroy(): void {
+  destroy(documentElement: Element): void {
+    console.log(documentElement)
     throw new Error('Method not implemented.')
   }
 

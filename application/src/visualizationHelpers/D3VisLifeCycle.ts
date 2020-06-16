@@ -1,8 +1,8 @@
 export interface D3VisLifeCycle<PropType, StateType> {
   // for componentDidMount
-  create(selection: Element, props: PropType, state: StateType): void
+  create(documentElement: Element, props: PropType, state: StateType): void
   // for componentDidUpdate
-  update(): void
+  update(documentElement: Element, props: PropType, state: StateType): void
   // for componentWillUnmount
-  destroy(): void
+  destroy(documentElement: Element): void
 }
