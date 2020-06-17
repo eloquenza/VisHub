@@ -3,11 +3,11 @@ import {Graph, Vertex, Edge} from 'typedecls/D3Types'
 import * as d3 from 'd3'
 
 import {ClassElementNames} from 'appConstants'
+import {ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {D3Graph} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 
 export class D3ForceGraph extends D3Graph<Vertex> {
-
   constructor() {
     super()
 
@@ -17,31 +17,32 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     )
   }
 
-  create(documentElement: Element, props: GraphProps, state: any): void {
+  createHook(
+    selection: d3.Selection<any, any, any, any>,
+    props: GraphProps
+  ): void {
+    selection.append('g').classed('vertices', true)
+    selection.append('g').classed('edges', true)
+    selection.append('g').classed('labels', true)
+
+    this.updateHook(selection, props)
+  }
+
+  updateHook(selection: d3.Selection<any, any, any, any>, props: GraphProps) {
     const {width, height} = props.window
     const graph = props.data as Graph
     const {vertices, edges} = graph
 
-    console.log(state)
-
     const simulation = this.createSimulation(graph, width, height)
-    const parentSVG = this.styleSVG(documentElement, props)
-    this.createVertices(parentSVG, simulation, vertices)
-    this.createEdges(parentSVG, edges)
-    this.createLabels(parentSVG, vertices)
 
-    simulation.nodes(vertices).on('tick', this.onTick)
+    this.drawVertices(selection, simulation, vertices)
+    this.drawEdges(selection, edges)
+    this.drawLabels(selection, vertices)
   }
 
-
-  styleSVG(documentElement: Element, props: GraphProps) {
-    const {width, height} = props.window
-
-    return d3
-      .select(documentElement)
-      .attr('viewBox', `0 0 ${width} ${height}`)
-      .classed('svg-content-responsive', true)
-      .attr('preserveAspectRatio', 'xMidYMid meet')
+  viewBoxHook(containerDims: ContainerDimensions) {
+    const {width, height} = containerDims
+    return `0 0 ${width} ${height}`
   }
 
   createSimulation(graph: Graph, width: number, height: number) {
@@ -56,16 +57,17 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       )
       .force('charge', d3.forceManyBody().strength(-250))
       .force('center', d3.forceCenter(width / 2, height / 2))
+      .nodes(graph.vertices)
+      .on('tick', this.onTick)
   }
 
-  createVertices(
-    parentSVG: d3.Selection<Element, unknown, null, undefined>,
+  drawVertices<ElementType extends Element>(
+    parentSVG: d3.Selection<ElementType, unknown, null, undefined>,
     simulation: d3.Simulation<Vertex, Edge>,
     vertices: Vertex[]
   ) {
     parentSVG
-      .append('g')
-      .classed('vertices', true)
+      .selectAll('g.vertices')
       .selectAll(ClassElementNames.svgCircleElementName)
       .data(vertices)
       .join(ClassElementNames.svgCircleElementName)
@@ -100,13 +102,12 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     )
   }
 
-  createEdges(
-    parentSVG: d3.Selection<Element, unknown, null, undefined>,
+  drawEdges<ElementType extends Element>(
+    parentSVG: d3.Selection<ElementType, unknown, null, undefined>,
     edges: Edge[]
   ) {
     parentSVG
-      .append('g')
-      .classed('edges', true)
+      .selectAll('g.edges')
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
       .selectAll(ClassElementNames.svgLineElementName)
@@ -117,13 +118,12 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .attr('stroke-width', d => Math.sqrt(d.value))
   }
 
-  createLabels(
-    parentSVG: d3.Selection<Element, unknown, null, undefined>,
+  drawLabels<ElementType extends Element>(
+    parentSVG: d3.Selection<ElementType, unknown, null, undefined>,
     vertices: Vertex[]
   ) {
     parentSVG
-      .append('g')
-      .classed('labels', true)
+      .selectAll('g.labels')
       .selectAll(ClassElementNames.svgTextElementName)
       .data(vertices)
       .join(ClassElementNames.svgTextElementName)
@@ -146,10 +146,6 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     d3.selectAll(`.${ClassElementNames.forceLabelsClassName}`)
       .attr('x', (d: any) => d.x + 5)
       .attr('y', (d: any) => d.y + 5)
-  }
-
-  update(documentElement: Element, props: GraphProps, state: any): void {
-    console.log(documentElement, props, state)
   }
 
   highlightSelectedVertex(selectedVertex: Vertex): void {

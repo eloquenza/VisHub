@@ -8,12 +8,12 @@ import {
   D3ForceGraph,
   D3SearchStrategy,
 } from 'visualizationHelpers'
-import { ClassElementNames } from 'appConstants'
+import {ClassElementNames} from 'appConstants'
 
 import styles from 'styles/AuthorNetwork.module.css'
 
-import data from '../../miserables'
 import GraphComponent from 'components/visualizations/GraphComponent'
+import data from '../../miserables'
 
 interface AuthorNetworkProps {
   width: number
@@ -26,7 +26,6 @@ function loadTreeRoot() {
     .hierarchy(treeifiedGraph)
     .sort((a, b) => d3.ascending(a.data.id, b.data.id)) as EdgeBundlingNode
   return bilinks(hierarchy)
-
 }
 
 const root = loadTreeRoot()
@@ -119,10 +118,6 @@ export default class AuthorNetwork extends React.Component<
       searchInput: input,
     })
     this.searchForAuthor(input)
-  }
-
-  componentDidUpdate() {
-    console.log("authornetwork updating")
   }
 
   render() {

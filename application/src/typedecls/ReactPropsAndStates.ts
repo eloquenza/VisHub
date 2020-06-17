@@ -1,9 +1,9 @@
 import {Graph, Vertex} from 'typedecls/D3Types'
 import {D3EdgeBundlingGraph} from 'visualizationHelpers/D3EdgeBundlingGraph'
 import {D3ForceGraph} from 'visualizationHelpers/D3ForceGraph'
+import {D3Graph} from 'visualizationHelpers/D3Graph'
 import {EdgeBundlingNode, ChartDatum} from './D3Types'
 import {ContainerDimensions} from './CssStyleTypes'
-import { D3Graph } from 'visualizationHelpers/D3Graph'
 
 export type ChildrenProps = {
   children?: React.ReactNode

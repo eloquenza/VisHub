@@ -6,10 +6,7 @@ import {Box} from 'rebass'
 function Users() {
   return (
     <>
-      <AuthorNetwork
-        width={window.innerWidth}
-        height={window.innerHeight}
-      />
+      <AuthorNetwork width={window.innerWidth} height={window.innerHeight} />
       <Box
         sx={{
           display: 'grid',

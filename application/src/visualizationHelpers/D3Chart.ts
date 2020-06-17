@@ -115,6 +115,6 @@ export class D3Chart implements D3VisLifeCycle<ChartProps, ChartState> {
   }
 
   destroy(documentElement: Element): void {
-    console.log(documentElement)
+    d3.select(documentElement).selectAll('*').remove()
   }
 }

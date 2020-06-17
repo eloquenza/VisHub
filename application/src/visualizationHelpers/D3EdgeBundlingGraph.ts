@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-import {SVGCSSAttribute} from 'typedecls/CssStyleTypes'
+import {SVGCSSAttribute, ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {EdgeBundlingNode, NodeElem, EdgeBundlingEdge} from 'typedecls/D3Types'
 import {GraphProps} from 'typedecls/ReactPropsAndStates'
 
@@ -22,50 +22,36 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     )
   }
 
-  create(documentElement: Element, props: GraphProps, state: any): void {
-    const { width } = props.window
-    const root = props.data as EdgeBundlingNode
+  createHook(
+    selection: d3.Selection<any, any, any, any>,
+    props: GraphProps
+  ): void {
+    this.prepareGroupElements(selection)
 
-    console.log("Inside d3edgebundling create")
-
-    const cluster: d3.ClusterLayout<NodeElem> = d3
-      .cluster<NodeElem>()
-      .size([2 * Math.PI, width / 3])
-    const rootNode = cluster(root) as EdgeBundlingNode
-    const lineGenerator = d3
-      .lineRadial<EdgeBundlingNode>()
-      .curve(d3.curveBundle.beta(0.85))
-      .radius(d => d.y)
-      .angle(d => d.x)
-
-    console.log(state)
-
-    const svg = this.styleSVG(documentElement, props)
-    this.createVertices(svg, (rootNode as unknown) as EdgeBundlingNode)
-    // creating the edges once via either incoming or outgoing is enough.
-    this.createEdges(
-      svg,
-      lineGenerator,
-      rootNode.leaves().flatMap(node => node.outgoing)
-    )
+    this.updateHook(selection, props)
   }
 
-  styleSVG(documentElement: Element, props: GraphProps) {
-    const { width } = props.window
+  prepareGroupElements(selection: d3.Selection<any, any, any, any>) {
+    if (selection.select('g.labels').empty()) {
+      applyAttrsToSelection(selection.append('g').classed('labels', true), [
+        {name: 'font-family', value: 'sans-serif'},
+        {name: 'font-size', value: 18},
+      ])
+      selection.append('g').classed('edges', true)
+    }
+  }
 
-    return d3
-      .select(documentElement)
-      .attr('viewBox', `${-width / 2}, ${-width / 2}, ${width}, ${width}`)
-      .classed('svg-content-responsive', true)
-      .attr('preserveAspectRatio', 'xMidYMid meet')
+  viewBoxHook(containerDims: ContainerDimensions) {
+    const {width} = containerDims
+    return `${-width / 2}, ${-width / 2}, ${width}, ${width}`
   }
 
   createVertices(
-    parentSVG: d3.Selection<Element, unknown, null, undefined>,
+    parentSVG: d3.Selection<any, unknown, null, undefined>,
     rootNode: EdgeBundlingNode
   ) {
-    const gSelection = parentSVG.append('g')
-    const textSelections = gSelection
+    const textSelections = parentSVG
+      .selectAll('g.labels')
       .selectAll('g')
       .classed('vertices', true)
       .data<EdgeBundlingNode>(rootNode.leaves())
@@ -89,10 +75,6 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
         )
       )
 
-    applyAttrsToSelection(gSelection, [
-      {name: 'font-family', value: 'sans-serif'},
-      {name: 'font-size', value: 18},
-    ])
     applyAttrsToSelection(textSelections, [
       {name: 'dy', value: '0.31em'},
       {name: 'x', value: d => (d.x < Math.PI ? 6 : -6)},
@@ -102,16 +84,12 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
   }
 
   createEdges(
-    parentSVG: d3.Selection<Element, unknown, null, undefined>,
+    parentSVG: d3.Selection<any, unknown, null, undefined>,
     lineGenerator: d3.LineRadial<EdgeBundlingNode>,
     edges: EdgeBundlingEdge[]
   ) {
-
-    console.log("Inside d3edgebundling edges")
-    console.log(edges)
     parentSVG
-      .append('g')
-      .classed('edges', true)
+      .selectAll('g.edges')
       .attr('stroke', Colors.colorNone)
       .attr('fill', 'none')
       .selectAll(ClassElementNames.svgPathElementName)
@@ -172,7 +150,30 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     )
   }
 
-  update(documentElement: Element, props: GraphProps, state: any): void {
-    console.log(documentElement, props, state)
+  updateHook(
+    selection: d3.Selection<any, any, any, any>,
+    props: GraphProps
+  ): void {
+    const {width} = props.window
+    const root = props.data as EdgeBundlingNode
+
+    const cluster: d3.ClusterLayout<NodeElem> = d3
+      .cluster<NodeElem>()
+      .size([2 * Math.PI, width / 3])
+    const rootNode = cluster(root) as EdgeBundlingNode
+    const lineGenerator = d3
+      .lineRadial<EdgeBundlingNode>()
+      .curve(d3.curveBundle.beta(0.85))
+      .radius(d => d.y)
+      .angle(d => d.x)
+
+    this.prepareGroupElements(selection)
+    this.createVertices(selection, (rootNode as unknown) as EdgeBundlingNode)
+    // creating the edges once via either incoming or outgoing is enough.
+    this.createEdges(
+      selection,
+      lineGenerator,
+      rootNode.leaves().flatMap(node => node.outgoing)
+    )
   }
 }
