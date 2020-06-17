@@ -62,7 +62,7 @@ export default class AuthorNetwork extends React.Component<
     }
   }
 
-  onRadioButtonSwitchGraph(event: React.ChangeEvent<HTMLInputElement>) {
+  onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const graphType = event.currentTarget.value as GraphTypes
     this.setState(state => {
       switch (state.currentGraphName) {
@@ -128,32 +128,28 @@ export default class AuthorNetwork extends React.Component<
     return (
       <div className={styles.authorNetworkContainer}>
         <div className={styles.authorNetworkMenuBar}>
-          <text>Search by author name</text>
-          <input
-            type="text"
-            value={this.state.searchInput}
-            onChange={event => this.searchBarOnChange(event)}
-            list="test"
-          />
-          <datalist id="test">{verticesForSelection}</datalist>
-          <div className={styles.authorNetworkRadioButtons}>
-            Force-directed graph
+
+          { /* Textfeld */ }
+          <div className={styles.authorNetworkInline}>
+            <text>Search by author name:&nbsp;</text>
             <input
-              id="force"
-              value="force"
-              type="radio"
-              checked={this.state.currentGraphName === 'force'}
-              onChange={event => this.onRadioButtonSwitchGraph(event)}
-            />
-            Radial edge-bundling graph
-            <input
-              id="edgebundling"
-              value="edgebundling"
-              type="radio"
-              checked={this.state.currentGraphName === 'edgebundling'}
-              onChange={event => this.onRadioButtonSwitchGraph(event)}
-            />
+              type="text"
+              value={this.state.searchInput}
+              onChange={event => this.searchBarOnChange(event)}
+              list="test" />
+            <datalist id="test">{verticesForSelection}</datalist>
           </div>
+
+          { /* Dropdown */ }
+          <div className={styles.authorNetworkInline}>
+            <text>Graphentyp:&nbsp;</text>
+            <select
+              onChange={event => this.onSelectChange(event)}>
+              <option value="force">Force-directed graph</option>
+              <option value="edgebundling">Radial edge-bundling graph</option>
+            </select>
+          </div>
+
         </div>
         {this.state.networkVisualisation}
       </div>
