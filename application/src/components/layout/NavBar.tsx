@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react'
 import {NavLink} from 'react-router-dom'
-import {RouteObject, RouteNames, routesMap} from 'configs/routes'
+import {RouteObject, routesMap} from 'configs/routes'
 import {ChildrenProps} from 'typedecls/ReactPropsAndStates'
 import generateReactKey from 'utils/reactKeyGeneration'
 
@@ -29,40 +29,42 @@ const NavLinkStyled: FunctionComponent<NavLinkProps> = ({
   to,
   exact,
   children,
-}: NavLinkProps) => (
-  <NavLink exact={exact} to={to} className={styles.navLink}>
-    {children}
-  </NavLink>
-)
+}: NavLinkProps) => {
+  return (
+    <NavLink exact={exact} to={to} className={styles.navLink} activeClassName={styles.navLinkCurrent}>
+      {children}
+    </NavLink>
+  )
+}
+
+const pageName = Object.values<RouteObject>(routesMap).slice(0, 1).map(({path, visibleName}, index) => {
+  return (
+    <PageName key={generateReactKey('routesMap', index)}>
+      <NavLinkStyled exact to={path}>
+        {visibleName}
+      </NavLinkStyled>
+    </PageName>
+  )
+})
 
 // Procedurally create all navigation bar elements from the routesMap
-const routes = Object.values<RouteObject>(routesMap).map(
-  ({path, visibleName}, index) => {
-    switch (visibleName) {
-      case RouteNames[RouteNames.Vishub]:
-        return (
-          <PageName key={generateReactKey('routesMap', index)}>
-            <NavLinkStyled exact to={path}>
-              {visibleName}
-            </NavLinkStyled>
-          </PageName>
-        )
-      default:
-        return (
-          <NavElement key={generateReactKey('routesMap', index)}>
-            <NavLinkStyled to={path}>{visibleName}</NavLinkStyled>
-          </NavElement>
-        )
-    }
-  }
-)
+const routes = Object.values<RouteObject>(routesMap).slice(1).map(({path, visibleName}, index) => {
+  return (
+    <NavElement key={generateReactKey('routesMap', index)}>
+      <NavLinkStyled exact to={path}>{visibleName}</NavLinkStyled>
+   </NavElement>
+  )
+})
 
 function NavBar() {
-  return (
-    <nav className={styles.nav}>
-      <ul className={styles.ul}>{routes}</ul>
-    </nav>
-  )
+    return (
+      <nav className={styles.nav}>
+        <ul className={styles.ul}>
+          {pageName}
+          {routes}
+        </ul>
+      </nav>
+    )
 }
 
 export default NavBar

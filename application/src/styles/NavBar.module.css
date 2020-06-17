@@ -20,6 +20,7 @@
 
 .pageName {
     composes: navElementsBase;
+    font-weight: bold;
     font-size: 28px;
     order: 0;
 }
@@ -38,7 +39,12 @@
 .navLink {
     text-decoration: none;
     color: hsl(255,0%,100%);
-    font-weight: 600;
+}
+
+.navLinkCurrent {
+    composes: navLink;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .navLink:hover {
