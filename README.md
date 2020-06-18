@@ -4,6 +4,8 @@ A information visualization project that tries to visualize some aspects of GitH
 
 Jump to how to start/use below, if you are interesting in running the application instead of a lot of talk around the project.
 
+![](screenshots/webpage.jpg)
+
 ## Project organization
 
 This project consists of two parts:
