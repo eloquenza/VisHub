@@ -100,6 +100,7 @@ Depending on the representation type, the some operations have a similar, but no
   * Dragging works like in force-directed graph but without stickyness
   * Model can be turned around via left mouse button down
   * Panning here works via right mouse button down
+  * Searching inside this graph is not implemented/supported (due to time constraints)
 
 ## Where does the data come from?
 
