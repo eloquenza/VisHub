@@ -50,6 +50,9 @@ A user can interact with the graph as follows:
   * Zooming has a maximum and minimum limit to ensure that the user cannot lose the graph in the vast universe of an SVG element - this unfortunately has the problem that on reaching either the maximal or minimal amount of zoom allowed, the browser will then zoom into/out of the webpage. Please be aware of this fact
 * Searching by typing in data in the search input field above the graph highlights the vertex
   * During this operation, the user has access to an autocomplete feature to help him discover GitHub accounts
+  * Searching allows for multiple selects, i.e. all vertices will be highlighted, that match the term searched for - be more specific, if you want to focus on a specific user
+  * Hovering over a vertex while searching effective cancels the search operation without clearing the search input
+    * Not fixed due to time constraints
 * Switching the graph representation via a dropdown menu by opening the dropdown menu labelled with "Representation types" and selecting one of the 3 given options:
   * Force-directed graph
   * 3D Force-directed graph
