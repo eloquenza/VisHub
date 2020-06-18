@@ -5,7 +5,9 @@ import {ClassElementNames} from 'appConstants'
 import {D3VisLifeCycle} from './D3VisLifeCycle'
 import {D3SearchStrategy} from './D3SearchStategy'
 
-export const zoomContainerCSSSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.graphContainerClassName} ${ClassElementNames.svgGElementName}.${ClassElementNames.zoomGroupClassName}`
+export const graphSVGContainerCSSSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.graphContainerClassName}`
+
+export const zoomContainerCSSSelector = `${graphSVGContainerCSSSelector} ${ClassElementNames.svgGElementName}.${ClassElementNames.zoomGroupClassName}`
 
 export abstract class D3Graph<VertexType>
   implements D3VisLifeCycle<GraphProps, GraphState> {
