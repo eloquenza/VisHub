@@ -83,6 +83,56 @@ Mostly because of time constraints, but rather because of the large amount of da
 
 I do not have enough hard drive space left, therefore loading a large amount of data and preprocessing it in a locally hosted DB was not really possible - I also question if this would have been an successful endeavor because of the amount of CPU time needed to perform large SELECTs/JOINs on a dataset that is way above a TB.
 BigQuery's free tier was quickly eaten through with a simple query of asking which repos use which language.
+Therefore, I have resorted to use the API only for the account-specific user data. Not much I can do.
+
+### Scraping the GitHub GraphQL API for account-specific user data
+
+Following queries were issued by logging into: https://developer.github.com/v4/explorer/
+
+I have extracted all the names of the nodes from the data/musae_git_data-reduced.ts in a form, where each user is written on a single line.
+Afterwards, I applied the following regex to create a GraphQL query, that will provide me the user data I am most interested in:
+
+```
+\t$1: user(login: "$1") {\n\t\t...UserFragment\n\t}
+```
+
+The layout of the query is then the following:
+
+```
+query {
+  amiryeg: user(login: "amiryeg") {
+    ...UserFragment
+  }
+  // more users in the same format
+}
+
+fragment UserFragment on User {
+    login
+    name
+    company
+    bio
+    location
+    avatarUrl
+    repositories(first: 10) {
+      nodes {
+        name
+        primaryLanguage {
+          name
+        }
+      }
+    }
+    createdAt
+    updatedAt
+}
+```
+
+The fragment declaration helps me to reduce the amount of data I am querying, as I am not interested in whether the account type is either User or Organization nor the URLs to their repos, subscriptions, followers or other things because can be recreated as they all follow the following format:
+
+```
+https://api.github.com/users/amiryeg/{orgs,subscription,followers, ...}
+```
+
+Some users have a dash (or other special characters) in their name, which is not allowed as a qualifier in the GraphQL query language. These have been manually removed. The valid qualifier identifier follow most programming languages conventions (i.e. variable naming in Java for example) and such I will not list these rules here.
 
 [1]: <https://www.gharchive.org/> "GHArchive"
 [2]: <https://developers.google.com/bigquery/> "Google BigQuery"
