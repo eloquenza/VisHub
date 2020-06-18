@@ -26,7 +26,7 @@ div {
 }
 
 * {
-  outline: none !important; 
+  outline: none !important;
 }
 
 .header {
@@ -35,9 +35,9 @@ div {
   left: 0;
   right: 0;
   height: 60px;
-  background-color: hsl(210,12.2%,16.1%);
+  background-color: hsl(210, 12.2%, 16.1%);
   padding: 10px 20px;
-  box-shadow: 0 0 2px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
   z-index: 3;
 }
 
@@ -54,16 +54,16 @@ div {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 150px;
   background-color: #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
 
 .content {
   position: absolute;
   top: 60px;
-  left: 300px;
+  left: 150px;
   right: 0;
   bottom: 0;
   background-color: #f0f0f0;
@@ -73,13 +73,13 @@ div {
 
 .columns {
   display: flex;
-  margin: -.75rem;
+  margin: -0.75rem;
   flex-wrap: wrap;
 }
 
 .column {
   display: block;
-  padding: .75rem;
+  padding: 0.75rem;
 }
 
 .column.is-4 {
@@ -95,7 +95,7 @@ div {
 
 .panel {
   background: white;
-  box-shadow: 0 0 2px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -103,7 +103,7 @@ div {
 .panel h3 {
   margin: 0;
   color: white;
-  background-color: hsl(210,12.2%,16.1%);
+  background-color: hsl(210, 12.2%, 16.1%);
   height: 50px;
   line-height: 50px;
   padding: 0 15px;
