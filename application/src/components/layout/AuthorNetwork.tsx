@@ -15,11 +15,7 @@ import styles from 'styles/AuthorNetwork.module.css'
 import GraphComponent from 'components/visualizations/GraphComponent'
 import data from '../../data/musae_git_data-reduced'
 import generateReactKey from 'utils/reactKeyGeneration'
-
-interface AuthorNetworkProps {
-  width: number
-  height: number
-}
+import { AuthorNetworkProps, AuthorNetworkState, GraphTypes } from 'typedecls/ReactPropsAndStates'
 
 // Not possible to create the data for the d3-hierarchy at compile time
 // Extracting the data is also not possible because JSON.stringify fails
@@ -33,15 +29,6 @@ function loadTreeRoot() {
 }
 
 const root = loadTreeRoot()
-
-type GraphTypes = 'force' | 'edgebundling' | '3dforce'
-
-interface AuthorNetworkState {
-  currentGraphName: GraphTypes
-  searchInput: string
-  networkVisualisation: React.ReactNode
-  searchCallback: (allVertices: Vertex[], searchTerm: string) => void
-}
 
 export default class AuthorNetwork extends React.Component<
   AuthorNetworkProps,

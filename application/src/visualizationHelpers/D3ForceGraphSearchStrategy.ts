@@ -9,9 +9,6 @@ export class D3ForceGraphSearchStrategy extends D3SearchStrategy<Vertex> {
   }
 
   findElement(allVerticesList: Vertex[], searchTerm: string): Vertex[] {
-    console.log(allVerticesList.filter(vertex =>
-      vertex.name?.toLowerCase().includes(searchTerm.toLowerCase())
-    ))
     return allVerticesList.filter(vertex =>
       vertex.name?.toLowerCase().includes(searchTerm.toLowerCase())
     )

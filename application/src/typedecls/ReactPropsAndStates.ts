@@ -43,3 +43,18 @@ export interface GraphProps {
 export interface GraphState {
   data: Graph | EdgeBundlingNode
 }
+
+export interface AuthorNetworkProps {
+  width: number
+  height: number
+}
+
+// lock down possible graph representation types
+export type GraphTypes = 'force' | 'edgebundling' | '3dforce'
+
+export interface AuthorNetworkState {
+  currentGraphName: GraphTypes
+  searchInput: string
+  networkVisualisation: React.ReactNode
+  searchCallback: (allVertices: Vertex[], searchTerm: string) => void
+}

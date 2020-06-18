@@ -11,22 +11,18 @@ export default class GraphComponent extends React.Component<GraphProps, GraphSta
     this.state = {
       data: this.props.loadData()
     }
-    console.log("I am logging inside the constructor of " + this.props.containerClassName)
   }
 
   componentDidMount() {
-    console.log(`mount ${this.props.containerClassName}`)
     this.props.graphFactory.create(this.ref, this.props, this.state)
     this.props.setSearchCallbackFunction(this.searchCallback.bind(this))
   }
 
   componentDidUpdate() {
-    console.log(`update ${this.props.containerClassName}`)
     this.props.graphFactory.update(this.ref, this.props, this.state)
   }
 
   componentWillUnmount() {
-    console.log(`unmount ${this.props.containerClassName}`)
     this.props.graphFactory.destroy(this.ref)
   }
 
