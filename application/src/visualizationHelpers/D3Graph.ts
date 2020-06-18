@@ -5,7 +5,7 @@ import {ClassElementNames} from 'appConstants'
 import {D3VisLifeCycle} from './D3VisLifeCycle'
 import {D3SearchStrategy} from './D3SearchStategy'
 
-const zoomContainerCSSSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.graphContainerClassName} ${ClassElementNames.svgGElementName}.${ClassElementNames.zoomGroupClassName}`
+export const zoomContainerCSSSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.graphContainerClassName} ${ClassElementNames.svgGElementName}.${ClassElementNames.zoomGroupClassName}`
 
 export abstract class D3Graph<VertexType>
   implements D3VisLifeCycle<GraphProps, GraphState> {
@@ -80,14 +80,19 @@ export abstract class D3Graph<VertexType>
   private registerZoomPanHandler(parentSVG: d3.Selection<any, any, any, any>) {
     // disable wheel zooming to not interfere with native scrolling
     // enable zooming only on ctrl + wheeling
-    const zoomBehaviour = d3.zoom<SVGElement, any>().filter(() => {
-      if (d3.event.type === 'wheel') {
-        return d3.event.ctrlKey
-      } else if (d3.event.type === 'dblclick') {
-        return false;
-      }
-      return true
-    })
+    const min_zoom = 0.1;
+    const max_zoom = 7;
+    const zoomBehaviour = d3.zoom<SVGElement, any>()
+      .filter(() => {
+        if (d3.event.type === 'wheel') {
+          return d3.event.ctrlKey
+        } else if (d3.event.type === 'dblclick') {
+          return false;
+        }
+        return true
+      })
+      // declare min/max zoom so the user cannot "zoom" the graph away
+      .scaleExtent([min_zoom,max_zoom])
     // register the listener to the parent SVG element, but add the transform/scale to the child Group element
     // This way, the graph does not bounce around because the transformation matrix is calculated relative to the mouse location
     parentSVG.call(zoomBehaviour.on('zoom', zoomFunction))
