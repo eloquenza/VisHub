@@ -53,9 +53,17 @@ export default class AuthorNetwork extends React.Component<
 
   constructor(props: AuthorNetworkProps) {
     super(props)
+    // create react components as class members to easily switch between them
     this.forceGraphComponent = this.createForceGraphComponent()
     this.edgeBundlingGraphComponent = this.createEdgeBundlingGraph()
-    this.threeDimensionalForceGraphComponent= <ForceGraph3D key={generateReactKey('3dforceGraph', 1)} graphData={{ nodes: data.vertices, links: data.edges }}/>
+    // this is enabled by the dependency react-force-graph-3d
+    // Normally I would have not resorted to using a 'does it all package'
+    // due to the project's context in a university module about
+    // exactly this topics but I had severe problems to get a 3D graph
+    // working as in my original version the canvas element simply
+    // did not want to be visible on the web page
+    this.threeDimensionalForceGraphComponent = <ForceGraph3D key={generateReactKey('3dforceGraph', 1)} graphData={{ nodes: data.vertices, links: data.edges }}/>
+
     this.state = {
       currentGraphName: 'force',
       searchInput: '',
