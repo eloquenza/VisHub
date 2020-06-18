@@ -78,36 +78,52 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   ) {
     parentSVG
       .selectAll('g.vertices')
-      .selectAll(ClassElementNames.svgCircleElementName)
+      .selectAll<SVGCircleElement, Vertex>(ClassElementNames.svgCircleElementName)
       .data(vertices)
       .join(ClassElementNames.svgCircleElementName)
       .attr('r', 5)
       .classed(ClassElementNames.forceVerticesClassName, true)
       .on('mouseover', this.highlightSelectedVertex)
       .on('mouseout', this.dehighlightSelectedVertex)
+      // if vertex is fixed, remove via double click and reset color
+      .on('dblclick', (v: Vertex, index: number, array: ArrayLike<SVGCircleElement>) => {
+        d3.select(array[index]).attr("fill", null)
+          v.fx = null // eslint-disable-line no-param-reassign
+          v.fy = null // eslint-disable-line no-param-reassign
+      })
 
-    d3.selectAll<SVGCircleElement, Vertex>(
-      `.${ClassElementNames.forceVerticesClassName}`
-    ).call(
+      this.addDragEventListener(
+        d3.selectAll<SVGCircleElement, Vertex>(
+          `.${ClassElementNames.forceVerticesClassName}`),
+        simulation
+      )
+  }
+
+  addDragEventListener(vertices: d3.Selection<SVGCircleElement, Vertex, HTMLElement, undefined>, simulation: d3.Simulation<Vertex, Edge>) {
+    vertices.call(
       d3
         .drag<SVGCircleElement, Vertex>()
-        .on('start', (d: Vertex) => {
+        .on('start', (v: Vertex, index: number, array: ArrayLike<SVGCircleElement>) => {
           if (!d3.event.active) {
             simulation.alphaTarget(0.3).restart()
           }
-          d.fx = d.x // eslint-disable-line no-param-reassign
-          d.fy = d.y // eslint-disable-line no-param-reassign
+          // set color to indicate that the vertex is fixed
+          d3.select(array[index]).attr("fill", '#ff66d6')
+          v.fx = v.x // eslint-disable-line no-param-reassign
+          v.fy = v.y // eslint-disable-line no-param-reassign
         })
-        .on('drag', (d: Vertex) => {
-          d.fx = d3.event.x // eslint-disable-line no-param-reassign
-          d.fy = d3.event.y // eslint-disable-line no-param-reassign
+        .on('drag', (v: Vertex) => {
+          v.fx = d3.event.x // eslint-disable-line no-param-reassign
+          v.fy = d3.event.y // eslint-disable-line no-param-reassign
         })
-        .on('end', (d: Vertex) => {
+        .on('end', (v: Vertex) => {
           if (!d3.event.active) {
             simulation.alphaTarget(0)
           }
-          d.fx = null // eslint-disable-line no-param-reassign
-          d.fy = null // eslint-disable-line no-param-reassign
+          // do not set the following attributes to make the vertex
+          // sticky after user interaction, i.e. stay where it was put
+          // v.fx = null // eslint-disable-line no-param-reassign
+          // v.fy = null // eslint-disable-line no-param-reassign
         })
     )
   }
@@ -168,7 +184,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
             .attr('stroke-opacity', 1)
         } else {
           d3.select(nodes[index])
-          .attr('stroke-opacity', 0.1)
+          .attr('stroke-opacity', 0.3)
         }
     })
   }
