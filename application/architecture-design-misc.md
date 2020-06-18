@@ -42,3 +42,10 @@ This ensures that there will be no cross-framework cutting problems.
 CSS is mostly handled via CSS modules or, if needed, directly via D3 selections for the visualizations.
 
 This enables the code to be mostly free of CSS declarations.
+
+## Lessons learned
+
+While I liked that I had access to types due to Typescript, I feel like most examples for d3 only work because they modify data inline (i.e. adding a property to an element) which made adapting examples rather hard.
+Further more, the types were not declared by the developer of d3 and I feel some types were declared in a rather confusing way that made this experience overall rather horrible.
+
+React might have been a bit overkill, but it helped me to develop this rather quickly due to not needing to handle any project setup or similar things.
