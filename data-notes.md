@@ -136,7 +136,7 @@ The fragment declaration helps me to reduce the amount of data I am querying, as
 https://api.github.com/users/amiryeg/{orgs,subscription,followers, ...}
 ```
 
-Some users have a dash (or other special characters) in their name, which is not allowed as a qualifier in the GraphQL query language. These have been manually removed. The valid qualifier identifier follow most programming languages conventions (i.e. variable naming in Java for example) and such I will not list these rules here.
+Some users have a dash (or other special characters) in their name, which is not allowed as a qualifier in the GraphQL query language. These have been manually removed and have been manually readded in the resulting JSON (because these were only 14 entries and creating a program/regex for this would have taken longer). The valid qualifier identifier follow most programming languages conventions (i.e. variable naming in Java for example) and such I will not list these rules here.
 
 [1]: <https://www.gharchive.org/> "GHArchive"
 [2]: <https://developers.google.com/bigquery/> "Google BigQuery"
