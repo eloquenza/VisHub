@@ -62,7 +62,10 @@ export default class AuthorNetwork extends React.Component<
     // exactly this topics but I had severe problems to get a 3D graph
     // working as in my original version the canvas element simply
     // did not want to be visible on the web page
-    this.threeDimensionalForceGraphComponent = <ForceGraph3D key={generateReactKey('3dforceGraph', 1)} graphData={{ nodes: data.vertices, links: data.edges }}/>
+    this.threeDimensionalForceGraphComponent = <ForceGraph3D
+      key={generateReactKey('3dforceGraph', 1)}
+      graphData={{ nodes: data.vertices, links: data.edges }}
+    />
 
     this.state = {
       currentGraphName: 'force',
@@ -169,13 +172,21 @@ export default class AuthorNetwork extends React.Component<
 
           { /* Dropdown */ }
           <div className={styles.authorNetworkInline}>
-            <text>Graphentyp:&nbsp;</text>
+            <text>Graph representation:&nbsp;</text>
             <select
               onChange={event => this.onSelectChange(event)}>
               <option value="force">Force-directed graph</option>
               <option value="3dforce">3D Force-directed graph</option>
               <option value="edgebundling">Radial edge-bundling graph</option>
             </select>
+          </div>
+
+          <div className={styles.authorNetworkInline}>
+            <text># of vertices: {data.vertices.length}&nbsp;</text>
+          </div>
+
+          <div className={styles.authorNetworkInline}>
+            <text># of edges: {data.edges.length}&nbsp;</text>
           </div>
 
         </div>
