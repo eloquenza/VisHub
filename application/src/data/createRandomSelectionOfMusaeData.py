@@ -24,7 +24,7 @@ for i, node in enumerate(verticesList):
 # print(k_clique_communities)
 
 from random import sample
-random_nodes = sample(list(graph.nodes()), 36000)
+random_nodes = sample(list(graph.nodes()), 36400)
 graph.remove_nodes_from(random_nodes)
 
 isolates = list(nx.isolates(graph))

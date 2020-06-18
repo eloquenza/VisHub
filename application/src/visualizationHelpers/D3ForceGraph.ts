@@ -65,7 +65,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       // where directly using forceX/Y prevents detached subgraphes from
       // escaping the viewport.
       .force("x", d3.forceX(width / 2))
-      .force("y", d3.forceY(width / 2))
+      .force("y", d3.forceY(height / 2))
       //.force('center', d3.forceCenter(width / 2, height / 2))
       .nodes(graph.vertices)
       .on('tick', this.onTick)

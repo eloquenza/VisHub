@@ -73,6 +73,9 @@ After that, I explored a few ideas:
 * Producing a max-cut - this seems currently not possible with networkx, but even if - this is a NP-hard operation. I am not sure if this would have been tractable considering I have a deadline to hit.
 
 Considering the alternatives, using a random amount of the graph seemed good enough.
+The script cuts the previous amount of vertices (37699) down to 1299, and then cuts every vertex that is a isolate, i.e. a vertex with no edge to another vertex. The resulting graph thus has below 1000 vertices.
+The numbers were rather created through a bit of a play around.
+I wanted the graph to be big enough so there is "something to explore", but not too big, because else the user experience is rather sad due to performance issues with SVG transforms/translates/scales on so many elements.
 
 ### Why was the BigQuery/Githubarchive idea scrapped
 
