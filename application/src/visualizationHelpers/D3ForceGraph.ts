@@ -185,7 +185,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   highlightSelectedVertex(selectedVertex: Vertex): void {
     // this needs to be here, as otherwise there is no way to make
     // a correct multi-selecting search
-    if (d3.event !== null && d3.event.type == 'mouseover') {
+    if (d3.event !== null && d3.event.type === 'mouseover') {
       d3.selectAll(`.${ClassElementNames.forceVerticesClassName}`)
       .attr('opacity', 0.1)
     }
@@ -204,7 +204,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
           verticesToHighlight.push(target)
           // this needs to be here, as otherwise there is no way to make
           // a correct multi-selecting search
-        } else if (d3.event !== null && d3.event.type == 'mouseover') {
+        } else if (d3.event !== null && d3.event.type === 'mouseover') {
           d3.select(nodes[index]).attr('stroke-opacity', 0.1)
         }
     })
@@ -215,7 +215,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
         if (verticesToHighlight.includes(v)) {
           d3.select(arr[i]).attr('opacity', 0.4)
         }
-        if (v.id == selectedVertex.id) {
+        if (v.id === selectedVertex.id) {
           d3.select(arr[i]).attr('opacity', 1)
         }
     })
