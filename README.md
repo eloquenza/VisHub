@@ -2,6 +2,8 @@
 
 A information visualization project that tries to visualize some aspects of GitHub, its users and their usage of GitHub.
 
+Jump to how to start/use below, if you are interesting in running the application instead of a lot of talk around the project.
+
 ## Project organization
 
 This project consists of two parts:
@@ -16,6 +18,13 @@ This project consists of two parts:
 In this project, students (read: here just me) are getting familiar with the Five Design Sheet methodology in order to learn a more formal design process.
 The professor acts as the client for our application.
 By creating the design sheets, students (again, just me) are forced to externalize their internal thoughts which makes it easier to discuss the design ideas with their professor.
+
+## Folder organization
+
+* [./application](./application): contains the application itself
+* [./decisions](./decisions): contains documents of "important" decisions taken
+* [./design-sheets](./design-sheets): contains the design-sheets that were submitted
+* [./data](./data): contains the preprocessed data and scripts/information used to reduce said data, see ./application/src/data for reduced data that is being used for the visualizations
 
 ## How to start
 
@@ -33,7 +42,19 @@ If you do not know how to do that, here are a few examples:
 
 As there is a considerable amount of JavaScript needed, using a HTTP server that serves the web page locally is the preferred (and currently only supported) variant.
 
-Please read the install.md inside [./application](./application) if you are interested in running or developing this application: [./application/install.md](./application/install.md)
+Please read the [./application/install.md](./application/install.md) inside [./application](./application) if you are interested in running or developing this application
+
+Please read the [./application/architecture-and-design.md](./application/architecture-and-design.md) document if you are interested in reading about architectural, design or other project-specific choices.
+
+The most interesting files that handle most of the possible interactions and visualizations are, in IMHO best viewing order:
+
+* [index.tsx](./application/src/index.tsx)
+* [Users.tsx](./application/src/components/subpages/Users.tsx)
+* [AuthorNetwork.tsx](./application/src/components/layout/AuthorNetwork.tsx)
+* [GraphComponent.tsx](./application/src/components/visualizations/GraphComponent.tsx)
+* [D3Graph.ts](./application/src/visualizationHelpers/D3Graph.ts)
+* [D3ForceGraph.ts](./application/src/visualizationHelpers/D3ForceGraph.ts)
+* [D3EdgeBundlingGraph.ts](./application/src/visualizationHelpers/D3EdgeBundlingGraph.ts)
 
 ## How to use
 
