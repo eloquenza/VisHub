@@ -42,7 +42,7 @@ Below the graph network are a few charts that currently are only filled with tes
 
 The graph network shows a selected subset of users on GitHub as vertices (the labels are their account name) that have starred atleast 10 repositories, the edges represent mutual follower relationships between them.
 
-A user can interact with the graph as follows:
+A user can interact with the graph as follows. Some operations behave differently based on the selected graph representation, please see below this list for more.
 
 * Panning to navigate the graph by pressing the left mouse button down and moving it around
 * Zoom in/out by control + mouse wheel:
@@ -58,6 +58,7 @@ A user can interact with the graph as follows:
   * 3D Force-directed graph
     * Please note that this uses WebGL and you need to have this enabled
   * Radial edge-bundling graph
+* Switching the graph representation effectively resets graph, i.e. returns all vertices to their original position and clears the search input.
 * Hovering with the mouse over a vertex displays a few information about the user (Full name, location, bio, companies, ...)
 
 Depending on the representation type, the some operations have a similar, but not quite the same effect:
