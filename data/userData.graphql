@@ -1,0 +1,954 @@
+query {
+	amiryeg: user(login: "amiryeg") {
+		...UserFragment
+	}
+	dineshsonachalam: user(login: "dineshsonachalam") {
+		...UserFragment
+	}
+	antirez: user(login: "antirez") {
+		...UserFragment
+	}
+	Stiivi: user(login: "Stiivi") {
+		...UserFragment
+	}
+	paulmillr: user(login: "paulmillr") {
+		...UserFragment
+	}
+	bailicangdu: user(login: "bailicangdu") {
+		...UserFragment
+	}
+	davidthewatson: user(login: "davidthewatson") {
+		...UserFragment
+	}
+	rmm5t: user(login: "rmm5t") {
+		...UserFragment
+	}
+	guangwong: user(login: "guangwong") {
+		...UserFragment
+	}
+	jastice: user(login: "jastice") {
+		...UserFragment
+	}
+	lnx1337: user(login: "lnx1337") {
+		...UserFragment
+	}
+	lris: user(login: "lris") {
+		...UserFragment
+	}
+	ccforward: user(login: "ccforward") {
+		...UserFragment
+	}
+	shanezhiu: user(login: "shanezhiu") {
+		...UserFragment
+	}
+	kangschampagne: user(login: "kangschampagne") {
+		...UserFragment
+	}
+	ivolo: user(login: "ivolo") {
+		...UserFragment
+	}
+	imsobear: user(login: "imsobear") {
+		...UserFragment
+	}
+	Ternence: user(login: "Ternence") {
+		...UserFragment
+	}
+	ahmadawais: user(login: "ahmadawais") {
+		...UserFragment
+	}
+	Smilexuhc: user(login: "Smilexuhc") {
+		...UserFragment
+	}
+	pedronauck: user(login: "pedronauck") {
+		...UserFragment
+	}
+	allenwong: user(login: "allenwong") {
+		...UserFragment
+	}
+	ankitjain28may: user(login: "ankitjain28may") {
+		...UserFragment
+	}
+	jprichardson: user(login: "jprichardson") {
+		...UserFragment
+	}
+	fernandojsg: user(login: "fernandojsg") {
+		...UserFragment
+	}
+	GauravWalia19: user(login: "GauravWalia19") {
+		...UserFragment
+	}
+	ArcherFMY: user(login: "ArcherFMY") {
+		...UserFragment
+	}
+	kumarshridhar: user(login: "kumar-shridhar") {
+		...UserFragment
+	}
+	medhini: user(login: "medhini") {
+		...UserFragment
+	}
+	thaewrapt: user(login: "thaewrapt") {
+		...UserFragment
+	}
+	geekvijay: user(login: "geekvijay") {
+		...UserFragment
+	}
+	cain2: user(login: "cain2") {
+		...UserFragment
+	}
+	jlfwong: user(login: "jlfwong") {
+		...UserFragment
+	}
+	Ceruleanacg: user(login: "Ceruleanacg") {
+		...UserFragment
+	}
+	azer: user(login: "azer") {
+		...UserFragment
+	}
+	nkbt: user(login: "nkbt") {
+		...UserFragment
+	}
+	jchassoul: user(login: "jchassoul") {
+		...UserFragment
+	}
+	elyor0529: user(login: "elyor0529") {
+		...UserFragment
+	}
+	posquit0: user(login: "posquit0") {
+		...UserFragment
+	}
+	s32x: user(login: "s32x") {
+		...UserFragment
+	}
+	ikrum: user(login: "ikrum") {
+		...UserFragment
+	}
+	Piashsarker: user(login: "Piashsarker") {
+		...UserFragment
+	}
+	luruke: user(login: "luruke") {
+		...UserFragment
+	}
+	kmanley: user(login: "kmanley") {
+		...UserFragment
+	}
+	aedorado: user(login: "aedorado") {
+		...UserFragment
+	}
+	pocke: user(login: "pocke") {
+		...UserFragment
+	}
+	apaszke: user(login: "apaszke") {
+		...UserFragment
+	}
+	lightningtgc: user(login: "lightningtgc") {
+		...UserFragment
+	}
+	muhammadtaqi: user(login: "muhammadtaqi") {
+		...UserFragment
+	}
+	leizongmin: user(login: "leizongmin") {
+		...UserFragment
+	}
+	bfortuner: user(login: "bfortuner") {
+		...UserFragment
+	}
+	berwin: user(login: "berwin") {
+		...UserFragment
+	}
+	shunok: user(login: "shunok") {
+		...UserFragment
+	}
+	mbabker: user(login: "mbabker") {
+		...UserFragment
+	}
+	kasvith: user(login: "kasvith") {
+		...UserFragment
+	}
+	cebe: user(login: "cebe") {
+		...UserFragment
+	}
+	heitortsergent: user(login: "heitortsergent") {
+		...UserFragment
+	}
+	szahn: user(login: "szahn") {
+		...UserFragment
+	}
+	khzaw: user(login: "khzaw") {
+		...UserFragment
+	}
+	Qard: user(login: "Qard") {
+		...UserFragment
+	}
+	Ac2zoom: user(login: "Ac2zoom") {
+		...UserFragment
+	}
+	jdanyow: user(login: "jdanyow") {
+		...UserFragment
+	}
+	RichardLitt: user(login: "RichardLitt") {
+		...UserFragment
+	}
+	jackmcdade: user(login: "jackmcdade") {
+		...UserFragment
+	}
+	mooyoul: user(login: "mooyoul") {
+		...UserFragment
+	}
+	suhao: user(login: "suhao") {
+		...UserFragment
+	}
+	danieldelcore: user(login: "danieldelcore") {
+		...UserFragment
+	}
+	ricardosierra: user(login: "ricardosierra") {
+		...UserFragment
+	}
+	godruoyi: user(login: "godruoyi") {
+		...UserFragment
+	}
+	SergioChan: user(login: "SergioChan") {
+		...UserFragment
+	}
+	renatonascalves: user(login: "renatonascalves") {
+		...UserFragment
+	}
+	mtsgeneroso: user(login: "mtsgeneroso") {
+		...UserFragment
+	}
+	davetheflashguy: user(login: "davetheflashguy") {
+		...UserFragment
+	}
+	gmcabrita: user(login: "gmcabrita") {
+		...UserFragment
+	}
+	sawepeter: user(login: "sawepeter") {
+		...UserFragment
+	}
+	dandgerson: user(login: "dandgerson") {
+		...UserFragment
+	}
+	colachg: user(login: "colachg") {
+		...UserFragment
+	}
+	S1ngS1ng: user(login: "S1ngS1ng") {
+		...UserFragment
+	}
+	padipata: user(login: "padipata") {
+		...UserFragment
+	}
+	ravencrown: user(login: "ravencrown") {
+		...UserFragment
+	}
+	coolfishstudio: user(login: "coolfishstudio") {
+		...UserFragment
+	}
+	LeeRayno: user(login: "LeeRayno") {
+		...UserFragment
+	}
+	chenweifang4: user(login: "chenweifang4") {
+		...UserFragment
+	}
+	DevinXian: user(login: "DevinXian") {
+		...UserFragment
+	}
+	pablopunk: user(login: "pablopunk") {
+		...UserFragment
+	}
+	revolunet: user(login: "revolunet") {
+		...UserFragment
+	}
+	antonbabenko: user(login: "antonbabenko") {
+		...UserFragment
+	}
+	nathanpitman: user(login: "nathanpitman") {
+		...UserFragment
+	}
+	ascoders: user(login: "ascoders") {
+		...UserFragment
+	}
+	nmrshll: user(login: "nmrshll") {
+		...UserFragment
+	}
+	kefirski: user(login: "kefirski") {
+		...UserFragment
+	}
+	UnisonCodeWorks: user(login: "UnisonCodeWorks") {
+		...UserFragment
+	}
+	SunShinewyf: user(login: "SunShinewyf") {
+		...UserFragment
+	}
+	mz026: user(login: "mz026") {
+		...UserFragment
+	}
+	Kibos: user(login: "Kibos") {
+		...UserFragment
+	}
+	jarib: user(login: "jarib") {
+		...UserFragment
+	}
+	timoxley: user(login: "timoxley") {
+		...UserFragment
+	}
+	raphaelcosta: user(login: "raphaelcosta") {
+		...UserFragment
+	}
+	Soyn: user(login: "Soyn") {
+		...UserFragment
+	}
+	kuroski: user(login: "kuroski") {
+		...UserFragment
+	}
+	sohelamin: user(login: "sohelamin") {
+		...UserFragment
+	}
+	tfrommen: user(login: "tfrommen") {
+		...UserFragment
+	}
+	erusev: user(login: "erusev") {
+		...UserFragment
+	}
+	html5cat: user(login: "html5cat") {
+		...UserFragment
+	}
+	HarrisHan: user(login: "HarrisHan") {
+		...UserFragment
+	}
+	Lascorbe: user(login: "Lascorbe") {
+		...UserFragment
+	}
+	cutmail: user(login: "cutmail") {
+		...UserFragment
+	}
+	alvaromb: user(login: "alvaromb") {
+		...UserFragment
+	}
+	goel42: user(login: "goel42") {
+		...UserFragment
+	}
+	jithurjacob: user(login: "jithurjacob") {
+		...UserFragment
+	}
+	HyukjinKwon: user(login: "HyukjinKwon") {
+		...UserFragment
+	}
+	achou11: user(login: "achou11") {
+		...UserFragment
+	}
+	nescalante: user(login: "nescalante") {
+		...UserFragment
+	}
+	farskid: user(login: "farskid") {
+		...UserFragment
+	}
+	guerreiro: user(login: "guerreiro") {
+		...UserFragment
+	}
+	rcstr: user(login: "rcstr") {
+		...UserFragment
+	}
+	joelparkerhenderson: user(login: "joelparkerhenderson") {
+		...UserFragment
+	}
+	jlaffaye: user(login: "jlaffaye") {
+		...UserFragment
+	}
+	abitlong: user(login: "abitlong") {
+		...UserFragment
+	}
+	orhanobut: user(login: "orhanobut") {
+		...UserFragment
+	}
+	solyarisoftware: user(login: "solyarisoftware") {
+		...UserFragment
+	}
+	ivysboy: user(login: "ivysboy") {
+		...UserFragment
+	}
+	NavAppaiya: user(login: "Nav-Appaiya") {
+		...UserFragment
+	}
+	abiyasa: user(login: "abiyasa") {
+		...UserFragment
+	}
+	mihdan: user(login: "mihdan") {
+		...UserFragment
+	}
+	sagargavhane: user(login: "sagar-gavhane") {
+		...UserFragment
+	}
+	KisukPark: user(login: "KisukPark") {
+		...UserFragment
+	}
+	hyeongukryu: user(login: "hyeongukryu") {
+		...UserFragment
+	}
+	NV: user(login: "NV") {
+		...UserFragment
+	}
+	srijiths: user(login: "srijiths") {
+		...UserFragment
+	}
+	TylerYang: user(login: "TylerYang") {
+		...UserFragment
+	}
+	pwfee: user(login: "pwfee") {
+		...UserFragment
+	}
+	haoflynet: user(login: "haoflynet") {
+		...UserFragment
+	}
+	billy21: user(login: "billy21") {
+		...UserFragment
+	}
+	coderfe: user(login: "coderfe") {
+		...UserFragment
+	}
+	hwdsl2: user(login: "hwdsl2") {
+		...UserFragment
+	}
+	drd: user(login: "drd") {
+		...UserFragment
+	}
+	afronski: user(login: "afronski") {
+		...UserFragment
+	}
+	generalhenry: user(login: "generalhenry") {
+		...UserFragment
+	}
+	kossnocorp: user(login: "kossnocorp") {
+		...UserFragment
+	}
+	sebas5384: user(login: "sebas5384") {
+		...UserFragment
+	}
+	LuizGMiranda: user(login: "LuizGMiranda") {
+		...UserFragment
+	}
+	pygaganthon: user(login: "pygaganthon") {
+		...UserFragment
+	}
+	akiyamaSM: user(login: "akiyamaSM") {
+		...UserFragment
+	}
+	elliotxx: user(login: "elliotxx") {
+		...UserFragment
+	}
+	francescobianco: user(login: "francescobianco") {
+		...UserFragment
+	}
+	okandavut: user(login: "okandavut") {
+		...UserFragment
+	}
+	geekerlait: user(login: "geeker-lait") {
+		...UserFragment
+	}
+	hakatashi: user(login: "hakatashi") {
+		...UserFragment
+	}
+	OriPekelman: user(login: "OriPekelman") {
+		...UserFragment
+	}
+	krzysztofmagosa: user(login: "krzysztof-magosa") {
+		...UserFragment
+	}
+	methodmissing: user(login: "methodmissing") {
+		...UserFragment
+	}
+	qinyaohe: user(login: "qinyao-he") {
+		...UserFragment
+	}
+	codecrusher: user(login: "code-crusher") {
+		...UserFragment
+	}
+	theoneandonlywoj: user(login: "theoneandonlywoj") {
+		...UserFragment
+	}
+	atsman: user(login: "atsman") {
+		...UserFragment
+	}
+	bkase: user(login: "bkase") {
+		...UserFragment
+	}
+	darothen: user(login: "darothen") {
+		...UserFragment
+	}
+	artkirienko: user(login: "artkirienko") {
+		...UserFragment
+	}
+	pranaygp: user(login: "pranaygp") {
+		...UserFragment
+	}
+	azet: user(login: "azet") {
+		...UserFragment
+	}
+	godofwharf: user(login: "godofwharf") {
+		...UserFragment
+	}
+	johnlinp: user(login: "johnlinp") {
+		...UserFragment
+	}
+	lihuanpeng: user(login: "lihuanpeng") {
+		...UserFragment
+	}
+	austinkelleher: user(login: "austinkelleher") {
+		...UserFragment
+	}
+	cccyb: user(login: "cccyb") {
+		...UserFragment
+	}
+	dtolb: user(login: "dtolb") {
+		...UserFragment
+	}
+	saikatbsk: user(login: "saikatbsk") {
+		...UserFragment
+	}
+	nziyouren: user(login: "nziyouren") {
+		...UserFragment
+	}
+	sampsyo: user(login: "sampsyo") {
+		...UserFragment
+	}
+	made2591: user(login: "made2591") {
+		...UserFragment
+	}
+	lyjamare: user(login: "lyjamare") {
+		...UserFragment
+	}
+	mateogianolio: user(login: "mateogianolio") {
+		...UserFragment
+	}
+	M0nica: user(login: "M0nica") {
+		...UserFragment
+	}
+	shershen08: user(login: "shershen08") {
+		...UserFragment
+	}
+	tdavidson: user(login: "t-davidson") {
+		...UserFragment
+	}
+	mkkhedawat: user(login: "mkkhedawat") {
+		...UserFragment
+	}
+	alissonpelizaro: user(login: "alissonpelizaro") {
+		...UserFragment
+	}
+	parham: user(login: "1995parham") {
+		...UserFragment
+	}
+	ericcarraway: user(login: "ericcarraway") {
+		...UserFragment
+	}
+	dimitriwalters: user(login: "dimitriwalters") {
+		...UserFragment
+	}
+	JohnDDuncanIII: user(login: "JohnDDuncanIII") {
+		...UserFragment
+	}
+	justinbmeyer: user(login: "justinbmeyer") {
+		...UserFragment
+	}
+	cschwem2er: user(login: "cschwem2er") {
+		...UserFragment
+	}
+	loo2k: user(login: "loo2k") {
+		...UserFragment
+	}
+	DylanTackoor: user(login: "DylanTackoor") {
+		...UserFragment
+	}
+	danielvlopes: user(login: "danielvlopes") {
+		...UserFragment
+	}
+	gabrielhahn: user(login: "gabriel-hahn") {
+		...UserFragment
+	}
+	imxieke: user(login: "imxieke") {
+		...UserFragment
+	}
+	chiyodad: user(login: "chiyodad") {
+		...UserFragment
+	}
+	joaoqalves: user(login: "joaoqalves") {
+		...UserFragment
+	}
+	GIKICoder: user(login: "GIKICoder") {
+		...UserFragment
+	}
+	FoghostCn: user(login: "FoghostCn") {
+		...UserFragment
+	}
+	robertoentringer: user(login: "robertoentringer") {
+		...UserFragment
+	}
+	NickYang1988: user(login: "NickYang1988") {
+		...UserFragment
+	}
+	mathxlee: user(login: "mathxlee") {
+		...UserFragment
+	}
+	hanxiaomax: user(login: "hanxiaomax") {
+		...UserFragment
+	}
+	albinekb: user(login: "albinekb") {
+		...UserFragment
+	}
+	rodrigogs: user(login: "rodrigogs") {
+		...UserFragment
+	}
+	ParkSB: user(login: "ParkSB") {
+		...UserFragment
+	}
+	eugene87222: user(login: "eugene87222") {
+		...UserFragment
+	}
+	Hitman666: user(login: "Hitman666") {
+		...UserFragment
+	}
+	ellisbrown: user(login: "ellisbrown") {
+		...UserFragment
+	}
+	chanchihiro: user(login: "chanchihiro") {
+		...UserFragment
+	}
+	capalmer1013: user(login: "capalmer1013") {
+		...UserFragment
+	}
+	ArangoGutierrez: user(login: "ArangoGutierrez") {
+		...UserFragment
+	}
+	lzw19951010: user(login: "lzw19951010") {
+		...UserFragment
+	}
+	aelmasry: user(login: "aelmasry") {
+		...UserFragment
+	}
+	snim2: user(login: "snim2") {
+		...UserFragment
+	}
+	exah: user(login: "exah") {
+		...UserFragment
+	}
+	markbrown4: user(login: "markbrown4") {
+		...UserFragment
+	}
+	gregjs: user(login: "greg-js") {
+		...UserFragment
+	}
+	prateekagarwal3: user(login: "prateekagarwal3") {
+		...UserFragment
+	}
+	MeetNandpal: user(login: "MeetNandpal") {
+		...UserFragment
+	}
+	seekaddo: user(login: "seekaddo") {
+		...UserFragment
+	}
+	timicodes: user(login: "timi-codes") {
+		...UserFragment
+	}
+	raphealolams: user(login: "raphealolams") {
+		...UserFragment
+	}
+	giraysam: user(login: "giraysam") {
+		...UserFragment
+	}
+	kurechon: user(login: "kurechon") {
+		...UserFragment
+	}
+	devmoses: user(login: "devmoses") {
+		...UserFragment
+	}
+	forivall: user(login: "forivall") {
+		...UserFragment
+	}
+	QuietWind: user(login: "QuietWind") {
+		...UserFragment
+	}
+	davedevelopment: user(login: "davedevelopment") {
+		...UserFragment
+	}
+	glivia: user(login: "glivia") {
+		...UserFragment
+	}
+	JiaweiZhuang: user(login: "JiaweiZhuang") {
+		...UserFragment
+	}
+	mikemaccana: user(login: "mikemaccana") {
+		...UserFragment
+	}
+	malcolmyu: user(login: "malcolmyu") {
+		...UserFragment
+	}
+	WangQingye: user(login: "WangQingye") {
+		...UserFragment
+	}
+	jia58960: user(login: "jia58960") {
+		...UserFragment
+	}
+	LeeJim: user(login: "LeeJim") {
+		...UserFragment
+	}
+	synax: user(login: "synax") {
+		...UserFragment
+	}
+	PingjunChen: user(login: "PingjunChen") {
+		...UserFragment
+	}
+	bobwei: user(login: "bobwei") {
+		...UserFragment
+	}
+	shalithasuranga: user(login: "shalithasuranga") {
+		...UserFragment
+	}
+	aliumujib: user(login: "aliumujib") {
+		...UserFragment
+	}
+	Jasonandy: user(login: "Jasonandy") {
+		...UserFragment
+	}
+	Fenscode: user(login: "Fenscode") {
+		...UserFragment
+	}
+	idoleat: user(login: "idoleat") {
+		...UserFragment
+	}
+	itsbalamurali: user(login: "itsbalamurali") {
+		...UserFragment
+	}
+	duffqiu: user(login: "duffqiu") {
+		...UserFragment
+	}
+	Isabellle: user(login: "Isabellle") {
+		...UserFragment
+	}
+	dhruvchitkara27: user(login: "dhruv-chitkara27") {
+		...UserFragment
+	}
+	freesuraj: user(login: "freesuraj") {
+		...UserFragment
+	}
+	jacobwgillespie: user(login: "jacobwgillespie") {
+		...UserFragment
+	}
+	elnur: user(login: "elnur") {
+		...UserFragment
+	}
+	andygrunwald: user(login: "andygrunwald") {
+		...UserFragment
+	}
+	insane018: user(login: "insane018") {
+		...UserFragment
+	}
+	serverglen: user(login: "serverglen") {
+		...UserFragment
+	}
+	dem108: user(login: "dem108") {
+		...UserFragment
+	}
+	Dianaaaa: user(login: "Dianaaaa") {
+		...UserFragment
+	}
+	Mehonoshin: user(login: "Mehonoshin") {
+		...UserFragment
+	}
+	JiashuWu: user(login: "JiashuWu") {
+		...UserFragment
+	}
+	Lessica: user(login: "Lessica") {
+		...UserFragment
+	}
+	iamjohnnyzhuang: user(login: "iamjohnnyzhuang") {
+		...UserFragment
+	}
+	jabbalaci: user(login: "jabbalaci") {
+		...UserFragment
+	}
+	KomaBeyond: user(login: "KomaBeyond") {
+		...UserFragment
+	}
+	CaleMcCollough: user(login: "CaleMcCollough") {
+		...UserFragment
+	}
+	gyuwon: user(login: "gyuwon") {
+		...UserFragment
+	}
+	chengaojie0011: user(login: "chengaojie0011") {
+		...UserFragment
+	}
+	fanqinghui: user(login: "fanqinghui") {
+		...UserFragment
+	}
+	jasonhargrove: user(login: "jasonhargrove") {
+		...UserFragment
+	}
+	sdball: user(login: "sdball") {
+		...UserFragment
+	}
+	feiwodev: user(login: "feiwodev") {
+		...UserFragment
+	}
+	magnum: user(login: "magnum") {
+		...UserFragment
+	}
+	BlazOrazem: user(login: "BlazOrazem") {
+		...UserFragment
+	}
+	DaDaMrX: user(login: "DaDaMrX") {
+		...UserFragment
+	}
+	ailzy: user(login: "ailzy") {
+		...UserFragment
+	}
+	bmuenzenmeyer: user(login: "bmuenzenmeyer") {
+		...UserFragment
+	}
+	prabhash1785: user(login: "prabhash1785") {
+		...UserFragment
+	}
+	handayu: user(login: "handayu") {
+		...UserFragment
+	}
+	happyte: user(login: "happyte") {
+		...UserFragment
+	}
+	jonathanpmartins: user(login: "jonathanpmartins") {
+		...UserFragment
+	}
+	reliq: user(login: "reliq") {
+		...UserFragment
+	}
+	jmxx: user(login: "jmxx") {
+		...UserFragment
+	}
+	shines77: user(login: "shines77") {
+		...UserFragment
+	}
+	jmsv: user(login: "jmsv") {
+		...UserFragment
+	}
+	AdiFahmi: user(login: "AdiFahmi") {
+		...UserFragment
+	}
+	oguzhanaslan: user(login: "oguzhanaslan") {
+		...UserFragment
+	}
+	OthmaneBlial: user(login: "OthmaneBlial") {
+		...UserFragment
+	}
+	nanomen: user(login: "nanomen") {
+		...UserFragment
+	}
+	evanmhm: user(login: "evanmhm") {
+		...UserFragment
+	}
+	athanasiosem: user(login: "athanasiosem") {
+		...UserFragment
+	}
+	mnlkrs: user(login: "mnlkrs") {
+		...UserFragment
+	}
+	anantjain6: user(login: "anantjain6") {
+		...UserFragment
+	}
+	cuber: user(login: "cuber") {
+		...UserFragment
+	}
+	panco95: user(login: "panco95") {
+		...UserFragment
+	}
+	attilah: user(login: "attilah") {
+		...UserFragment
+	}
+	erickluan: user(login: "erickluan") {
+		...UserFragment
+	}
+	kamranayub: user(login: "kamranayub") {
+		...UserFragment
+	}
+	ovhemert: user(login: "ovhemert") {
+		...UserFragment
+	}
+	heruan: user(login: "heruan") {
+		...UserFragment
+	}
+	adetante: user(login: "adetante") {
+		...UserFragment
+	}
+	amirkoklan: user(login: "amirkoklan") {
+		...UserFragment
+	}
+	giancarloandroid: user(login: "giancarloandroid") {
+		...UserFragment
+	}
+	RPallas92: user(login: "RPallas92") {
+		...UserFragment
+	}
+	themakshter: user(login: "themakshter") {
+		...UserFragment
+	}
+	samwhitehall: user(login: "samwhitehall") {
+		...UserFragment
+	}
+	akchinmay: user(login: "ak-chinmay") {
+		...UserFragment
+	}
+	adaptive: user(login: "adaptive") {
+		...UserFragment
+	}
+	YoungNK: user(login: "YoungNK") {
+		...UserFragment
+	}
+	niranjansa: user(login: "niranjan-sa") {
+		...UserFragment
+	}
+	ianthekirkland: user(login: "ianthekirkland") {
+		...UserFragment
+	}
+	kagemiku: user(login: "kagemiku") {
+		...UserFragment
+	}
+	taizan: user(login: "taizan") {
+		...UserFragment
+	}
+	chocsx: user(login: "chocsx") {
+		...UserFragment
+	}
+	LeyNmania: user(login: "LeyNmania") {
+		...UserFragment
+	}
+	ScarboroughCoral: user(login: "ScarboroughCoral") {
+		...UserFragment
+	}
+	richban: user(login: "richban") {
+		...UserFragment
+	}
+	iamcheeming: user(login: "iamcheeming") {
+		...UserFragment
+	}
+	saucxs: user(login: "saucxs") {
+		...UserFragment
+	}
+	Moniarchy: user(login: "Moniarchy") {
+		...UserFragment
+	}
+}
+
+fragment UserFragment on User {
+    login
+    name
+    company
+    bio
+    location
+    avatarUrl
+    repositories(first: 100) {
+      nodes {
+        name
+        primaryLanguage {
+          name
+        }
+      }
+    }
+    createdAt
+    updatedAt
+}
