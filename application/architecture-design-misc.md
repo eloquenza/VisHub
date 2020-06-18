@@ -17,8 +17,6 @@ All visualization related code, i.e. how are certain visualizations created, is 
 
 [Data](./src/data/) contains the reduced data that is actually being used for the visualizations
 
-[Configs](./src/configs/) contains configuration data, i.e which subpages are available
-
 [AppConstants](./src/constants/) contains constants or other static data that is reused in several contents
 
 [Styles](./src/styles/) contain the CSS declarations and modules used by the application
