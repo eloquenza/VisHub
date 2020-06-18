@@ -7,6 +7,33 @@ import {ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {D3Graph} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 
+import * as tooltips from '../data/userDataQueryResults.json'
+
+type RepositoryNode = {
+  name: string
+  primaryLanguage: null | {
+    name: string
+  }
+}
+
+type TooltipType = {
+  login: string
+  name: string | null
+  company: string | null
+  bio: string | null
+  location: string | null
+  avatarUrl: string
+  createdAt: string
+  updatedAt: string
+  repositories: {
+    nodes: RepositoryNode[]
+  }
+}
+
+type UserNameAsKey = {
+  [key: string]: TooltipType | null
+}
+
 export class D3ForceGraph extends D3Graph<Vertex> {
   constructor() {
     super()
@@ -76,13 +103,30 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     simulation: d3.Simulation<Vertex, Edge>,
     vertices: Vertex[]
   ) {
-    parentSVG
+    const circles = parentSVG
       .selectAll('g.vertices')
       .selectAll<SVGCircleElement, Vertex>(ClassElementNames.svgCircleElementName)
       .data(vertices)
       .join(ClassElementNames.svgCircleElementName)
       .attr('r', 5)
       .classed(ClassElementNames.forceVerticesClassName, true)
+
+      circles.append('title').text((v) => {
+        if (typeof v.name !== 'undefined') {
+          const tooltipString =
+          `Full name: ${(tooltips.data as UserNameAsKey)[v.name]?.name || 'No full name found'}\n`
+        + `Company: ${(tooltips.data as UserNameAsKey)[v.name]?.company || 'No companies found'}\n`
+        + `Bio: ${(tooltips.data as UserNameAsKey)[v.name]?.bio || 'No bio found'}\n`
+        + `Location: ${(tooltips.data as UserNameAsKey)[v.name]?.location  || 'No location found' }\n`
+        + `Account created at: ${(tooltips.data as UserNameAsKey)[v.name]?.createdAt}\n`
+        + `Last seen on GitHub: ${(tooltips.data as UserNameAsKey)[v.name]?.updatedAt}\n`
+
+          return tooltipString
+        }
+        return "Sorry, no data available - user currently not on GitHub"
+      })
+
+      circles
       .on('mouseover', this.highlightSelectedVertex)
       .on('mouseout', this.dehighlightSelectedVertex)
       // if vertex is fixed, remove via double click and reset color
@@ -178,6 +222,16 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   // normally I should also highlight the vertices here, that are directly
   // connected to the selected vertex - but currently the data is not formatted as a adjacency list.
   highlightSelectedVertex(selectedVertex: Vertex): void {
+    // const avatar = document.createElement('img')
+    // avatar.id = 'avatarImage'
+    // avatar.src = (tooltips.data as UserNameAsKey)[selectedVertex.name || 'undefined']?.avatarUrl || 'undefined'
+    // avatar.style.position = 'absolute';
+    // avatar.style.height = '50px';
+    // avatar.style.width = '50px';
+    // avatar.style.top = (d3.event.pageY || d3.event.clientY) + 'px';
+    // avatar.style.left = (d3.event.pageX || d3.event.clientX) + 'px';
+    // document.body.appendChild(avatar)
+
     highlightIncidentForceEdges(selectedVertex, (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => {
         const source = edge.source as Vertex
         const target = edge.target as Vertex
