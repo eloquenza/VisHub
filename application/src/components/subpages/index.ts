@@ -1,4 +1,4 @@
-import Languages from './Languages'
+import Licenses from './Licenses'
 import Users from './Users'
 
-export {Languages, Users}
+export {Licenses, Users}

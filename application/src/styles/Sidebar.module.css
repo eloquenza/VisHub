@@ -3,6 +3,10 @@ h4 {
   padding: 15px 20px;
 }
 
+ul {
+  padding-left: 20px;
+}
+
 a {
   text-decoration: none;
   display: block;
@@ -11,9 +15,14 @@ a {
   border-right: 3px solid transparent;
 }
 
+li {
+  font-size: 12px;
+}
+
 a:hover,
 a.selected {
   background: #f8f8f8;
   border-color: teal;
   color: teal;
 }
+

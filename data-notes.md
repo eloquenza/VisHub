@@ -138,6 +138,19 @@ https://api.github.com/users/amiryeg/{orgs,subscription,followers, ...}
 
 Some users have a dash (or other special characters) in their name, which is not allowed as a qualifier in the GraphQL query language. These have been manually removed and have been manually readded in the resulting JSON (because these were only 14 entries and creating a program/regex for this would have taken longer). The valid qualifier identifier follow most programming languages conventions (i.e. variable naming in Java for example) and such I will not list these rules here.
 
+### License data 
+
+License data was taken from https://madnight.github.io/githut/
+
+## Lessons learned
+
+Data acquistion is hard, pre-processing is even harder.
+I underestimated the effort needed to actually get the correct data and therefore have cut my development time in half.
+Due to this, I have to left out some ideas I had.
+This project is therefore pretty much only the graph viewer.
+
+I would have loved to implement a parallel coordinates like element like seen here https://githut.info/. Sad.
+
 [1]: <https://www.gharchive.org/> "GHArchive"
 [2]: <https://developers.google.com/bigquery/> "Google BigQuery"
 [3]: <https://networkx.github.io> "Networkx"

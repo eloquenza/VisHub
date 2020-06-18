@@ -61,7 +61,6 @@ The most interesting files that handle most of the possible interactions and vis
 ## How to use
 
 On visiting the page, you are greeted by an graph network and a sidebar for navigation.
-Below the graph network are a few charts that currently are only filled with test data (of appl stock values), so disregard these for now.
 
 The graph network shows a selected subset of users on GitHub as vertices (the labels are their account name) that have starred atleast 10 repositories, the edges represent mutual follower relationships between them.
 

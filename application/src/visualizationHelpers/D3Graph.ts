@@ -1,6 +1,5 @@
 import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 import * as d3 from 'd3'
-import {ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {ClassElementNames} from 'appConstants'
 import {D3VisLifeCycle} from './D3VisLifeCycle'
 import {D3SearchStrategy} from './D3SearchStategy'
@@ -10,22 +9,31 @@ export const graphSVGContainerCSSSelector = `${ClassElementNames.svgElementName}
 export const zoomContainerCSSSelector = `${graphSVGContainerCSSSelector} ${ClassElementNames.svgGElementName}.${ClassElementNames.zoomGroupClassName}`
 
 export abstract class D3Graph<VertexType>
-  implements D3VisLifeCycle<GraphProps, GraphState> {
+  extends D3VisLifeCycle<GraphProps, GraphState> {
   searchStrategy!: D3SearchStrategy<VertexType>
 
-  create(documentElement: Element, props: GraphProps, state: GraphState) {
-    const parentSVG = this.styleParentSVG(documentElement, props)
+  createBaseTypeHook(
+    documentElement: Element,
+    parentSVG: d3.Selection<any, any, any, any>,
+    props: GraphProps,
+    state: GraphState
+  ) {
     const zoomContainer = this.createChildSVGGElementForZooming(parentSVG)
     this.registerZoomPanHandler(parentSVG)
     const graphGroupSVG = this.createSVGGElementForGraph(zoomContainer, props)
-    this.createHook(graphGroupSVG, props, state)
+    this.createExtendedTypeHook(graphGroupSVG, props, state)
   }
 
-  update(documentElement: Element, props: GraphProps, state: GraphState) {
+  updateBaseTypeHook(
+    documentElement: Element,
+    parentSVG: d3.Selection<any, any, any, any>,
+    props: GraphProps,
+    state: GraphState
+  ) {
     const zoomContainer = d3
       .select(documentElement)
       .select(zoomContainerCSSSelector)
-    let graphContainer = zoomContainer.select(`g.${props.containerClassName}`)
+    let graphContainer = zoomContainer.select(`g.${props.className}`)
     // happens during the first switch, as it is an update from React's view
     // meaning the other graph representation will not be created, but rather
     // 'updated into creation'
@@ -35,14 +43,14 @@ export abstract class D3Graph<VertexType>
     // set visibility on all graph representations but the one getting updated
     // using css selectors to correctly filter out only direct descendants
     d3.selectAll(
-      `${zoomContainerCSSSelector} > g:not(.${props.containerClassName})`
+      `${zoomContainerCSSSelector} > g:not(.${props.className})`
     ).attr('visibility', 'hidden')
     // remove visibility on current graph representation if it is set
     zoomContainer
-      .selectAll(`g.${props.containerClassName}`)
+      .selectAll(`g.${props.className}`)
       .attr('visibility', null)
     this.resetzoomAndPan(documentElement, props, zoomContainer)
-    this.updateHook(graphContainer, props, state)
+    this.updateExtendedTypeHook(graphContainer, props, state)
   }
 
   destroy(documentElement: Element): void {
@@ -60,14 +68,6 @@ export abstract class D3Graph<VertexType>
     this.styleParentSVG(documentElement, props)
     // reset zoom transform matrix
     d3.select(documentElement).call(d3.zoom().transform, d3.zoomIdentity)
-  }
-
-  private styleParentSVG(documentElement: Element, props: GraphProps) {
-    return d3
-      .select(documentElement)
-      .attr('viewBox', this.viewBoxHook(props.window))
-      .classed('svg-content-responsive', true)
-      .attr('preserveAspectRatio', 'xMidYMid meet')
   }
 
   // this allows 'jumpless' panning and zooming due to transformations being applied to the g element instead of the parentSVG
@@ -104,17 +104,16 @@ export abstract class D3Graph<VertexType>
     parentElem: d3.Selection<any, any, any, any>,
     props: GraphProps
   ): d3.Selection<any, any, any, any> {
-    return parentElem.append('g').classed(props.containerClassName, true)
+    return parentElem.append('g').classed(props.className, true)
   }
 
-  protected abstract viewBoxHook(containerDims: ContainerDimensions): string
-  protected abstract createHook(
+  protected abstract createExtendedTypeHook(
     selection: d3.Selection<any, any, any, any>,
     props: GraphProps,
     state: GraphState
   ): void
 
-  protected abstract updateHook(
+  protected abstract updateExtendedTypeHook(
     selection: d3.Selection<any, any, any, any>,
     props: GraphProps,
     state: GraphState

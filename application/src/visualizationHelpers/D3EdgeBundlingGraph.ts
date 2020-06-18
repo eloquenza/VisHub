@@ -38,13 +38,13 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     )
   }
 
-  createHook(
+  createExtendedTypeHook(
     selection: d3.Selection<any, any, any, any>,
     props: GraphProps,
     state: GraphState
   ): void {
     this.prepareGroupElements(selection)
-    this.updateHook(selection, props, state)
+    this.updateExtendedTypeHook(selection, props, state)
   }
 
   prepareGroupElements(selection: d3.Selection<any, any, any, any>) {
@@ -163,7 +163,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     d3.select(selectedVertex.text).attr('font-weight', null)
   }
 
-  updateHook(
+  updateExtendedTypeHook(
     selection: d3.Selection<any, any, any, any>,
     props: GraphProps,
     state: GraphState

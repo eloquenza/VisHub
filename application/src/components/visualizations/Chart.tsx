@@ -1,18 +1,17 @@
 import React from 'react'
-import {ChartProps, ChartState} from 'typedecls/ReactPropsAndStates'
+import {BaseVisualizationArrayState, ChartProps} from 'typedecls/ReactPropsAndStates'
 import {D3Chart} from 'visualizationHelpers'
-import data from '../../aapl'
 
-export default class Chart extends React.Component<ChartProps, ChartState> {
+export default class Chart<DataType> extends React.Component<ChartProps<DataType>, BaseVisualizationArrayState<DataType>> {
   ref!: SVGSVGElement
-  chart: D3Chart
+  chart: D3Chart<DataType>
 
-  constructor(props: ChartProps) {
+  constructor(props: ChartProps<DataType>) {
     super(props)
     this.state = {
-      data: data.data.map(({date, close}) => ({date: new Date(date), close})),
+      data: this.props.loadData()
     }
-    this.chart = new D3Chart()
+    this.chart = new D3Chart(this.props.useLogScale)
   }
 
   componentDidMount() {

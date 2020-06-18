@@ -9,6 +9,7 @@ import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 import { createTooltipString } from 'utils/d3UtilityFunctions'
 
 export class D3ForceGraph extends D3Graph<Vertex> {
+
   constructor() {
     super()
 
@@ -18,7 +19,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     )
   }
 
-  createHook(
+  createExtendedTypeHook(
     selection: d3.Selection<any, any, any, any>,
     props: GraphProps,
     state: GraphState
@@ -32,10 +33,10 @@ export class D3ForceGraph extends D3Graph<Vertex> {
     selection.append('g').classed('labels', true)
     selection.append('g').classed('vertices', true)
 
-    this.updateHook(selection, props, state)
+    this.updateExtendedTypeHook(selection, props, state)
   }
 
-  updateHook(selection: d3.Selection<any, any, any, any>, props: GraphProps, state: GraphState) {
+  updateExtendedTypeHook(selection: d3.Selection<any, any, any, any>, props: GraphProps, state: GraphState) {
     const {width, height} = props.window
     const graph = state.data as Graph
     const {vertices, edges} = graph

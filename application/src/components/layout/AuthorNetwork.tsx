@@ -95,7 +95,7 @@ export default class AuthorNetwork extends React.Component<
       <GraphComponent
         key={generateReactKey('forceGraph', 1)}
         window={containerDims}
-        containerClassName={ClassElementNames.forceDirectedClassName}
+        className={ClassElementNames.forceDirectedClassName}
         loadData={() => data}
         graphFactory={forceGraphFactory}
         setSearchCallbackFunction={this.setSearchCallback.bind(this)}
@@ -110,7 +110,7 @@ export default class AuthorNetwork extends React.Component<
       <GraphComponent
         key={generateReactKey('edgeBundlingGraph', 1)}
         window={containerDims}
-        containerClassName={ClassElementNames.edgeBundlingClassName}
+        className={ClassElementNames.edgeBundlingClassName}
         loadData={() => root}
         graphFactory={edgeBundlingGraphFactory}
         setSearchCallbackFunction={this.setSearchCallback.bind(this)}

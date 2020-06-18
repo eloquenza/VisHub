@@ -40,8 +40,13 @@ export class Edge implements d3.SimulationLinkDatum<Vertex> {
 }
 
 export interface ChartDatum {
-  date: Date
-  close: number
+  name: Date
+  value: number
+}
+
+export interface PieChartDatum {
+  name: string
+  value: number
 }
 
 export type Graph = {

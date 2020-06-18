@@ -1,0 +1,24 @@
+.howTo {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hotkeyTitle {
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+hr {
+    border: 1px solid hsl(210, 12.2%, 16.1%);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.smallerHr {
+    border: 1px solid rgba(36, 41, 46, 0.308);
+    margin-left: 20px;
+    margin-right: 20px;
+}

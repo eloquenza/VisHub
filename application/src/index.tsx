@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { Users, Languages, Sidebar } from 'components'
+import { Users, Licenses , Sidebar } from 'components'
 
 import './styles/index.css'
 
@@ -31,8 +31,8 @@ ReactDOM.render(
             {/* The declared components inside a Route are the ones that will be rendered when said Route is matched */}
             <Users />
           </Route>
-          <Route path="/languages">
-            <Languages />
+          <Route path="/licenses">
+            <Licenses />
           </Route>
         </Switch>
       </div>
