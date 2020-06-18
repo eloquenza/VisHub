@@ -28,7 +28,6 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     state: GraphState
   ): void {
     this.prepareGroupElements(selection)
-    console.log(state.data)
     this.updateHook(selection, props, state)
   }
 

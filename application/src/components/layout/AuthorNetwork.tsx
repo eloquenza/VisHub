@@ -141,7 +141,7 @@ export default class AuthorNetwork extends React.Component<
 
   render() {
     const verticesForSelection = data.vertices.map(vertex => (
-      <option value={vertex.id} />
+      <option value={vertex.name} />
     ))
 
     return (

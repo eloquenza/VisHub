@@ -236,11 +236,14 @@ export class D3ForceGraph extends D3Graph<Vertex> {
         const source = edge.source as Vertex
         const target = edge.target as Vertex
         if (source.id === selectedVertex.id || target.id === selectedVertex.id) {
-          d3.select(nodes[index])
-            .attr('stroke-opacity', 1)
-        } else {
-          d3.select(nodes[index])
-          .attr('stroke-opacity', 0.3)
+          d3.select(nodes[index]).attr('stroke-opacity', 1)
+          // if the triggering event is a mouseover, then lower the
+          // opacity of each edge not directly incident to the selected
+          // vertex in order to make it clear, which vertex is getting /// highlighted
+          // this needs to be here, as otherwise there is no way to make
+          // a correct multi-selecting search
+        } else if (d3.event !== null && d3.event.type == 'mouseover') {
+          d3.select(nodes[index]).attr('stroke-opacity', 0.1)
         }
     })
   }
