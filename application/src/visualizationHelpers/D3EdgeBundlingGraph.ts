@@ -9,7 +9,7 @@ import {colorEdges, applyAttrsToSelection} from 'utils/d3UtilityFunctions'
 import {D3EdgeBundlingSearchStrategy} from './D3EdgeBundlingSearchStrategy'
 import {D3Graph} from './D3Graph'
 
-const edgesClassSelector = `${ClassElementNames.svgElementName}.${ClassElementNames.edgeBundlingClassName} ${ClassElementNames.svgGElementName}.${ClassElementNames.edgeBundlingEdgesClassName}`
+const edgesClassSelector = `${ClassElementNames.svgGElementName}.${ClassElementNames.edgeBundlingEdgesClassName}`
 
 export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
   constructor(root: EdgeBundlingNode) {
