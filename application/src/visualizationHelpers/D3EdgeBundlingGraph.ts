@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 import {SVGCSSAttribute, ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {EdgeBundlingNode, NodeElem, EdgeBundlingEdge} from 'typedecls/D3Types'
-import {GraphProps} from 'typedecls/ReactPropsAndStates'
+import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 
 import {Colors, ClassElementNames} from 'appConstants'
 import {colorEdges, applyAttrsToSelection} from 'utils/d3UtilityFunctions'
@@ -24,11 +24,12 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
 
   createHook(
     selection: d3.Selection<any, any, any, any>,
-    props: GraphProps
+    props: GraphProps,
+    state: GraphState
   ): void {
     this.prepareGroupElements(selection)
-
-    this.updateHook(selection, props)
+    console.log(state.data)
+    this.updateHook(selection, props, state)
   }
 
   prepareGroupElements(selection: d3.Selection<any, any, any, any>) {
@@ -61,7 +62,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
         d => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`
       )
       .append(ClassElementNames.svgTextElementName)
-      .text(d => d.data.id)
+      .text(d => d.data.name)
       .each(function (d) {
         d.text = this
       })
@@ -69,7 +70,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
       .on('mouseout', this.dehighlightSelectedVertex)
       .call(text =>
         text.append('title').text(
-          d => `${d.data.id}
+          d => `${d.data.name}
         ${d.outgoing.length} outgoing
         ${d.incoming.length} incoming`
         )
@@ -152,10 +153,11 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
 
   updateHook(
     selection: d3.Selection<any, any, any, any>,
-    props: GraphProps
+    props: GraphProps,
+    state: GraphState
   ): void {
     const {width} = props.window
-    const root = props.data as EdgeBundlingNode
+    const root = state.data as EdgeBundlingNode
 
     const cluster: d3.ClusterLayout<NodeElem> = d3
       .cluster<NodeElem>()

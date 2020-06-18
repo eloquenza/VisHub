@@ -35,6 +35,11 @@ export interface ChartState {
 export interface GraphProps {
   window: ContainerDimensions
   containerClassName: string
-  data: Graph | EdgeBundlingNode
+  loadData: () => Graph | EdgeBundlingNode
   graphFactory: D3Graph<Vertex | EdgeBundlingNode>
+  setSearchCallbackFunction: (callback: (allVertices: Vertex[], searchTerm: string) => void) => void
+}
+
+export interface GraphState {
+  data: Graph | EdgeBundlingNode
 }

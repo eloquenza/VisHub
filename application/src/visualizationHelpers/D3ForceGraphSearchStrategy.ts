@@ -8,7 +8,7 @@ export class D3ForceGraphSearchStrategy extends D3SearchStrategy<Vertex> {
 
   findElement(allVerticesList: Vertex[], searchTerm: string): Vertex[] {
     return allVerticesList.filter(vertex =>
-      vertex.id?.toLowerCase().includes(searchTerm.toLowerCase())
+      vertex.id === parseInt(searchTerm)
     )
   }
 }

@@ -21,7 +21,7 @@ export class D3EdgeBundlingSearchStrategy extends D3SearchStrategy<
     searchTerm: string
   ): EdgeBundlingNode[] {
     const foundElements = allVerticesList.filter(vertex =>
-      vertex.id?.toLowerCase().includes(searchTerm.toLowerCase())
+      vertex.id === parseInt(searchTerm)
     )
     return this.root
       .leaves()

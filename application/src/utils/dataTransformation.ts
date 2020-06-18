@@ -16,33 +16,21 @@ export type Tree = {
 }
 
 export function transformGraphIntoTree({vertices, edges}: Graph): any {
-  const groupById = new Map()
   const vertexById = new Map(
     vertices.map(vertex => [vertex.id, vertex as vertexWithAllDecendants])
   )
 
   vertexById.forEach((vertex: vertexWithAllDecendants) => {
-    let group = groupById.get(vertex.group)
-    if (!group) {
-      groupById.set(
-        vertex.group,
-        (group = {
-          id: vertex.group,
-          children: [],
-        })
-      )
-    }
-    group.children.push(vertex)
     vertex.targets = []
   })
 
   edges.forEach(({source, target}: Edge) => {
-    if (typeof source === 'string' && typeof target === 'string') {
+    if (typeof source === 'number' && typeof target === 'number') {
       vertexById.get(source)?.targets.push(target)
     }
   })
 
-  return {children: [...groupById.values()]}
+  return {children: [...vertexById.values()]}
 }
 
 export function bilinks(root: EdgeBundlingNode) {

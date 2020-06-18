@@ -1,4 +1,4 @@
-import {GraphProps} from 'typedecls/ReactPropsAndStates'
+import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 import {Graph, Vertex, Edge} from 'typedecls/D3Types'
 import * as d3 from 'd3'
 
@@ -19,18 +19,24 @@ export class D3ForceGraph extends D3Graph<Vertex> {
 
   createHook(
     selection: d3.Selection<any, any, any, any>,
-    props: GraphProps
+    props: GraphProps,
+    state: GraphState
   ): void {
-    selection.append('g').classed('vertices', true)
+    // In SVG, z-culling/z-index is defined via first element defined is
+    // first element painted, therefore, I want to let the vertices
+    // be painted last and be on top of everything
+    // https://www.w3.org/TR/SVG11/render.html#RenderingOrder
+    // https://www.w3.org/TR/SVG2/render.html#RenderingOrder
     selection.append('g').classed('edges', true)
     selection.append('g').classed('labels', true)
+    selection.append('g').classed('vertices', true)
 
-    this.updateHook(selection, props)
+    this.updateHook(selection, props, state)
   }
 
-  updateHook(selection: d3.Selection<any, any, any, any>, props: GraphProps) {
+  updateHook(selection: d3.Selection<any, any, any, any>, props: GraphProps, state: GraphState) {
     const {width, height} = props.window
-    const graph = props.data as Graph
+    const graph = state.data as Graph
     const {vertices, edges} = graph
 
     const simulation = this.createSimulation(graph, width, height)
@@ -46,17 +52,21 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   }
 
   createSimulation(graph: Graph, width: number, height: number) {
-    return d3
-      .forceSimulation<Vertex, Edge>(graph.vertices)
+    return d3.forceSimulation(graph.vertices)
       .force(
         'link',
         d3
           .forceLink(graph.edges)
-          .id(d => (d as Vertex).id || 'undefined')
+          .id((d: any) => (d as Vertex)?.id?.toString() || "0")
           .strength(0.3)
       )
       .force('charge', d3.forceManyBody().strength(-250))
-      .force('center', d3.forceCenter(width / 2, height / 2))
+      // do not use forceCenter because the graph could be disjunct
+      // where directly using forceX/Y prevents detached subgraphes from
+      // escaping the viewport.
+      .force("x", d3.forceX(width / 2))
+      .force("y", d3.forceY(width / 2))
+      //.force('center', d3.forceCenter(width / 2, height / 2))
       .nodes(graph.vertices)
       .on('tick', this.onTick)
   }
@@ -115,7 +125,6 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .join(ClassElementNames.svgLineElementName)
       .classed(ClassElementNames.forceEdgesClassName, true)
       .attr('pointer-events', 'none')
-      .attr('stroke-width', d => Math.sqrt(d.value))
   }
 
   drawLabels<ElementType extends Element>(
@@ -129,7 +138,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .join(ClassElementNames.svgTextElementName)
       .classed(ClassElementNames.forceLabelsClassName, true)
       .attr('pointer-events', 'none')
-      .text(d => d.id || 'undefined')
+      .text(d => d.name || 'undefined')
   }
 
   onTick() {
@@ -148,29 +157,40 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .attr('y', (d: any) => d.y + 5)
   }
 
+  // normally I should also highlight the vertices here, that are directly
+  // connected to the selected vertex - but currently the data is not formatted as a adjacency list.
   highlightSelectedVertex(selectedVertex: Vertex): void {
-    highlightIncidentForceEdges(selectedVertex, '#00f', 1)
+    highlightIncidentForceEdges(selectedVertex, (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => {
+        const source = edge.source as Vertex
+        const target = edge.target as Vertex
+        if (source.id === selectedVertex.id || target.id === selectedVertex.id) {
+          d3.select(nodes[index])
+            .attr('stroke-opacity', 1)
+        } else {
+          d3.select(nodes[index])
+          .attr('stroke-opacity', 0.1)
+        }
+    })
   }
 
   dehighlightSelectedVertex(selectedVertex: Vertex): void {
-    highlightIncidentForceEdges(selectedVertex, '#999', 0.6)
+    highlightIncidentForceEdges(selectedVertex,
+      (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) =>
+      d3.select(nodes[index]).attr('stroke-opacity', 0.6)
+    )
+    d3.selectAll(`.${ClassElementNames.forceVerticesClassName}`)
+      .attr('opacity', 1)
   }
 }
 
 function highlightIncidentForceEdges(
   selectedVertex: Vertex,
-  color: string,
-  opacity: number
+  edgeFunctor: (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => void
 ) {
   d3.selectAll<SVGLineElement, Edge>(
     `.${ClassElementNames.forceEdgesClassName}`
-  ).each((edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => {
-    const source = edge.source as Vertex
-    const target = edge.target as Vertex
-    if (source.id === selectedVertex.id || target.id === selectedVertex.id) {
-      d3.select(nodes[index])
-        .attr('stroke', color)
-        .attr('stroke-opacity', opacity)
-    }
-  })
+  ).each(
+    (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) =>
+        edgeFunctor(edge, index, nodes)
+  )
 }

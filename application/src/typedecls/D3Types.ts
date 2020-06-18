@@ -4,22 +4,25 @@ export class Vertex implements d3.SimulationNodeDatum {
   index?: number
   x?: number
   y?: number
+  z?: number
   vx?: number
   vy?: number
+  vz?: number
   fx?: number | null
   fy?: number | null
+  fz?: number | null
 
-  id?: string
-  group?: number
+  id?: number
+  name?: string
 
-  constructor(id: string, group: number) {
+  constructor(id: number, name: string) {
     this.id = id
-    this.group = group
+    this.name = name
   }
 }
 
 export type vertexWithAllDecendants = Vertex & {
-  targets: string[]
+  targets: number[]
 }
 
 export class Edge implements d3.SimulationLinkDatum<Vertex> {
@@ -27,15 +30,12 @@ export class Edge implements d3.SimulationLinkDatum<Vertex> {
   index?: number
 
   // must - defining enforced implementation properties
-  source: Vertex | string
-  target: Vertex | string
-
-  value: number
+  source: Vertex | number
+  target: Vertex | number
 
   constructor(source: Vertex, target: Vertex, value: number) {
     this.source = source
     this.target = target
-    this.value = value
   }
 }
 
@@ -51,7 +51,7 @@ export type Graph = {
 
 export type NodeElem = {
   id: string | number
-  group?: number
+  name: string
   targets: string[]
   children?: vertexWithAllDecendants[]
 }
