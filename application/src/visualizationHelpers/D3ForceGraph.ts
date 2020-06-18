@@ -6,33 +6,7 @@ import {ClassElementNames} from 'appConstants'
 import {ContainerDimensions} from 'typedecls/CssStyleTypes'
 import {D3Graph} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
-
-import * as tooltips from '../data/userDataQueryResults.json'
-
-type RepositoryNode = {
-  name: string
-  primaryLanguage: null | {
-    name: string
-  }
-}
-
-type TooltipType = {
-  login: string
-  name: string | null
-  company: string | null
-  bio: string | null
-  location: string | null
-  avatarUrl: string
-  createdAt: string
-  updatedAt: string
-  repositories: {
-    nodes: RepositoryNode[]
-  }
-}
-
-type UserNameAsKey = {
-  [key: string]: TooltipType | null
-}
+import { createTooltipString } from 'utils/d3UtilityFunctions'
 
 export class D3ForceGraph extends D3Graph<Vertex> {
   constructor() {
@@ -111,20 +85,7 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .attr('r', 5)
       .classed(ClassElementNames.forceVerticesClassName, true)
 
-      circles.append('title').text((v) => {
-        if (typeof v.name !== 'undefined') {
-          const tooltipString =
-          `Full name: ${(tooltips.data as UserNameAsKey)[v.name]?.name || 'No full name found'}\n`
-        + `Company: ${(tooltips.data as UserNameAsKey)[v.name]?.company || 'No companies found'}\n`
-        + `Bio: ${(tooltips.data as UserNameAsKey)[v.name]?.bio || 'No bio found'}\n`
-        + `Location: ${(tooltips.data as UserNameAsKey)[v.name]?.location  || 'No location found' }\n`
-        + `Account created at: ${(tooltips.data as UserNameAsKey)[v.name]?.createdAt}\n`
-        + `Last seen on GitHub: ${(tooltips.data as UserNameAsKey)[v.name]?.updatedAt}\n`
-
-          return tooltipString
-        }
-        return "Sorry, no data available - user currently not on GitHub"
-      })
+      circles.append('title').text((v) => createTooltipString(v.name || 'undefined'))
 
       circles
       .on('mouseover', this.highlightSelectedVertex)

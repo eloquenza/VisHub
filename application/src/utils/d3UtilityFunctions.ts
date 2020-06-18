@@ -1,6 +1,8 @@
 import * as d3 from 'd3'
 import {FontWeightString, SVGCSSAttribute} from 'typedecls/CssStyleTypes'
 
+import * as tooltips from '../data/userDataQueryResults.json'
+
 function assignValueToAttr<ElemType extends Element>(
   selection: d3.Selection<ElemType, any, any, any>,
   attr: string,
@@ -50,4 +52,44 @@ export function applyAttrsToSelection<ElemType extends Element>(
     }
   })
   return selection
+}
+
+export function createTooltipString(accountName: string) {
+  if (accountName !== 'undefined') {
+    const tooltipString = `Full name: ${(tooltips.data as UserNameAsKey)[accountName]?.name || 'No full name found'}\n`
+      + `Company: ${(tooltips.data as UserNameAsKey)[accountName]?.company || 'No companies found'}\n`
+      + `Bio: ${(tooltips.data as UserNameAsKey)[accountName]?.bio || 'No bio found'}\n`
+      + `Location: ${(tooltips.data as UserNameAsKey)[accountName]?.location  || 'No location found' }\n`
+      + `Account created at: ${(tooltips.data as UserNameAsKey)[accountName]?.createdAt}\n`
+      + `Last seen on GitHub: ${(tooltips.data as UserNameAsKey)[accountName]?.updatedAt}\n`
+
+    return tooltipString
+  }
+  return "Sorry, no data available - user currently not on GitHub"
+}
+
+// types needed to read out the json holding all the account-specific user data, i.e. for tooltips
+type RepositoryNode = {
+  name: string
+  primaryLanguage: null | {
+    name: string
+  }
+}
+
+type TooltipType = {
+  login: string
+  name: string | null
+  company: string | null
+  bio: string | null
+  location: string | null
+  avatarUrl: string
+  createdAt: string
+  updatedAt: string
+  repositories: {
+    nodes: RepositoryNode[]
+  }
+}
+
+type UserNameAsKey = {
+  [key: string]: TooltipType | null
 }

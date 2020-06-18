@@ -12,7 +12,7 @@ export class Vertex implements d3.SimulationNodeDatum {
   fy?: number | null
   fz?: number | null
 
-  id?: number
+  id: number
   name?: string
 
   constructor(id: number, name: string) {
@@ -50,9 +50,9 @@ export type Graph = {
 }
 
 export type NodeElem = {
-  id: string | number
+  id: number
   name: string
-  targets: string[]
+  targets: number[]
   children?: vertexWithAllDecendants[]
 }
 

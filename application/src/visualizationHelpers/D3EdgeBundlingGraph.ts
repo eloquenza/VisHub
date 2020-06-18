@@ -5,7 +5,7 @@ import {EdgeBundlingNode, NodeElem, EdgeBundlingEdge} from 'typedecls/D3Types'
 import {GraphProps, GraphState} from 'typedecls/ReactPropsAndStates'
 
 import {Colors, ClassElementNames} from 'appConstants'
-import {colorEdges, applyAttrsToSelection} from 'utils/d3UtilityFunctions'
+import {colorEdges, applyAttrsToSelection, createTooltipString} from 'utils/d3UtilityFunctions'
 import {D3EdgeBundlingSearchStrategy} from './D3EdgeBundlingSearchStrategy'
 import {D3Graph} from './D3Graph'
 
@@ -72,6 +72,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
           d => `${d.data.name}
         ... has ${d.followers.length} followers
         ... is following ${d.following.length} users`
+        + `\n\n${createTooltipString(d.data.name)}`
         )
       )
 

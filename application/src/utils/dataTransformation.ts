@@ -40,8 +40,8 @@ export function bilinks(root: EdgeBundlingNode) {
   root.leaves().forEach(node => {
     node.following = []
     node.followers = []
-    node.data.targets.forEach(targetString => {
-      const targetNode = map.get(targetString)
+    node.data.targets.forEach(target => {
+      const targetNode = map.get(target)
       if (typeof targetNode !== 'undefined') {
         const newEdge: EdgeBundlingEdge = {
           source: node,
