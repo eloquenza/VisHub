@@ -70,8 +70,8 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
       .call(text =>
         text.append('title').text(
           d => `${d.data.name}
-        ${d.outgoing.length} outgoing
-        ${d.incoming.length} incoming`
+        ... has ${d.followers.length} followers
+        ... is following ${d.following.length} users`
         )
       )
 
@@ -108,20 +108,20 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
   highlightSelectedVertex(selectedVertex: EdgeBundlingNode) {
     d3.selectAll(edgesClassSelector).style('mix-blend-mode', null)
     colorEdges(
-      d3.selectAll(selectedVertex.incoming.map(edge => edge.svgPath)),
+      d3.selectAll(selectedVertex.following.map(edge => edge.svgPath)),
       Colors.colorIn
     )
     colorEdges(
-      d3.selectAll(selectedVertex.outgoing.map(edge => edge.svgPath)),
+      d3.selectAll(selectedVertex.followers.map(edge => edge.svgPath)),
       Colors.colorOut
     )
     const boldFont: SVGCSSAttribute = {name: 'font-weight', value: 'bold'}
     applyAttrsToSelection(
-      d3.selectAll(selectedVertex.incoming.map(({source}) => source.text)),
+      d3.selectAll(selectedVertex.following.map(({source}) => source.text)),
       [{name: 'fill', value: Colors.colorIn}, boldFont]
     )
     applyAttrsToSelection(
-      d3.selectAll(selectedVertex.outgoing.map(({target}) => target.text)),
+      d3.selectAll(selectedVertex.followers.map(({target}) => target.text)),
       [{name: 'fill', value: Colors.colorOut}, boldFont]
     )
   }
@@ -129,11 +129,11 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
   dehighlightSelectedVertex(selectedVertex: EdgeBundlingNode) {
     d3.selectAll(edgesClassSelector).style('mix-blend-mode', 'multiply')
     colorEdges(
-      d3.selectAll(selectedVertex.incoming.map(edge => edge.svgPath)),
+      d3.selectAll(selectedVertex.following.map(edge => edge.svgPath)),
       Colors.colorNone
     )
     colorEdges(
-      d3.selectAll(selectedVertex.outgoing.map(edge => edge.svgPath)),
+      d3.selectAll(selectedVertex.followers.map(edge => edge.svgPath)),
       Colors.colorNone
     )
     const attrs: SVGCSSAttribute[] = [
@@ -141,11 +141,11 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
       {name: 'font-weight', value: null},
     ]
     applyAttrsToSelection(
-      d3.selectAll(selectedVertex.outgoing.map(({target}) => target.text)),
+      d3.selectAll(selectedVertex.followers.map(({target}) => target.text)),
       attrs
     )
     applyAttrsToSelection(
-      d3.selectAll(selectedVertex.incoming.map(({source}) => source.text)),
+      d3.selectAll(selectedVertex.following.map(({source}) => source.text)),
       attrs
     )
   }
@@ -174,7 +174,7 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     this.createEdges(
       selection,
       lineGenerator,
-      rootNode.leaves().flatMap(node => node.outgoing)
+      rootNode.leaves().flatMap(node => node.followers)
     )
   }
 }

@@ -64,8 +64,8 @@ export interface EdgeBundlingEdge {
 
 export interface EdgeBundlingNode extends d3.HierarchyPointNode<NodeElem> {
   text: SVGTextElement
-  incoming: EdgeBundlingEdge[]
-  outgoing: EdgeBundlingEdge[]
+  following: EdgeBundlingEdge[]
+  followers: EdgeBundlingEdge[]
   x: number
   y: number
 }

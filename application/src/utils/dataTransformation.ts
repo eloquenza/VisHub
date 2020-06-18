@@ -38,8 +38,8 @@ export function bilinks(root: EdgeBundlingNode) {
   const map = new Map(leaves.map(d => [d.data.id, d]))
 
   root.leaves().forEach(node => {
-    node.incoming = []
-    node.outgoing = []
+    node.following = []
+    node.followers = []
     node.data.targets.forEach(targetString => {
       const targetNode = map.get(targetString)
       if (typeof targetNode !== 'undefined') {
@@ -51,14 +51,14 @@ export function bilinks(root: EdgeBundlingNode) {
           // if, for some types, there is no way to instantiate them
           svgPath: Object.create(SVGPathElement.prototype, {}),
         }
-        node.outgoing.push(newEdge)
+        node.followers.push(newEdge)
       }
     })
   })
 
   root.leaves().forEach(node => {
-    node.outgoing.forEach(outgoingEdge => {
-      outgoingEdge.target.incoming.push(outgoingEdge)
+    node.followers.forEach(outgoingEdge => {
+      outgoingEdge.target.following.push(outgoingEdge)
     })
   })
 
