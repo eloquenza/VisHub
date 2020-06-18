@@ -29,11 +29,6 @@ If not, simply type the URL yourself into the browser address bar.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `yarn build`
 
 Builds the app for production mode to the `build` folder.<br />
@@ -43,3 +38,28 @@ The build is minified and the filenames include the hashes.<br />
 VisHub is then ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn {dry}-lint`
+
+Calls the linter to discover errors/warnings based on the following styleguides:
+
+[Google's Typescript style guide](https://github.com/google/gts)
+[Airbnb's React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming)
+
+Also formats all sources according to their styles + adjustments I made, see [./eslintrc](./.eslintrc).
+
+### More commands
+
+Most notable:
+
+- `yarn clean`: cleans the built sources
+- `yarn compile` compiles the sources
+
+See [./package.json](./package.json) for more.
+
+## Caveats during development
+
+This project uses Husky and Lint-staged to automatically call ESLint and prettier on every commit.
+Due to time constraints, I have abandoned tending to all errors/warnings found because they have mostly been about style decisions that do not impact the performance of this project _currently_.
+I am therefore sorry, if somebody out there tries to use this repository and gets hit by an avalanche of errors.
+Use `git commit --no-verify` to temporarily dismiss these errors.
