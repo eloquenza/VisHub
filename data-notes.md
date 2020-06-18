@@ -79,10 +79,14 @@ I wanted the graph to be big enough so there is "something to explore", but not 
 
 ### Why was the BigQuery/Githubarchive idea scrapped
 
-Mostly because of time constraints, but rather because of the large amount of data available with no easy way to filter through it.
+Mostly because of time constraints and quite frankly because of the large amount of data available with no easy way to filter through it.
 
 I do not have enough hard drive space left, therefore loading a large amount of data and preprocessing it in a locally hosted DB was not really possible - I also question if this would have been an successful endeavor because of the amount of CPU time needed to perform large SELECTs/JOINs on a dataset that is way above a TB.
 BigQuery's free tier was quickly eaten through with a simple query of asking which repos use which language.
+
+Sadly, this made calculating which user really interacted with another user via commits/issues on the same repository quite hard which is why I switched to the graph data set available on SNAP Stanford.
+For all that it is worth - for the purpose of this small visualization as submission, the result, i.e. the presentation the user sees, is pretty much the same but with other features denoted by the edges.
+
 Therefore, I have resorted to use the API only for the account-specific user data. Not much I can do.
 
 ### Scraping the GitHub GraphQL API for account-specific user data
