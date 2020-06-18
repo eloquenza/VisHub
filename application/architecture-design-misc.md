@@ -36,3 +36,9 @@ To match this lifecycle, there is [D3VisLifeCycle.ts](./src/visualizationHelpers
 
 If a parent component is created/updated/destroyed, the parent component will ask the visualization itself to do the same.
 This ensures that there will be no cross-framework cutting problems.
+
+## CSS modules
+
+CSS is mostly handled via CSS modules or, if needed, directly via D3 selections for the visualizations.
+
+This enables the code to be mostly free of CSS declarations.
