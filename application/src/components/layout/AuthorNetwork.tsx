@@ -77,27 +77,22 @@ export default class AuthorNetwork extends React.Component<
 
   onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const graphType = event.currentTarget.value as GraphTypes
-    console.log(graphType)
+    var newRepresentation;
     this.setState(state => {
       switch (graphType) {
         case 'force':
-          return {
-            networkVisualisation: this.forceGraphComponent,
-            searchInput: '',
-            currentGraphName: graphType,
-          }
+          newRepresentation = this.forceGraphComponent
+          break;
         case 'edgebundling':
-          return {
-            networkVisualisation: this.edgeBundlingGraphComponent,
-            searchInput: '',
-            currentGraphName: graphType,
-          }
+          newRepresentation = this.edgeBundlingGraphComponent
+          break;
         case '3dforce':
-          return {
-            networkVisualisation: this.threeDimensionalForceGraphComponent,
-            searchInput: '',
-            currentGraphName: graphType,
-          }
+          newRepresentation = this.threeDimensionalForceGraphComponent
+      }
+      return {
+        networkVisualisation: newRepresentation,
+        searchInput: '',
+        currentGraphName: graphType,
       }
     })
   }
