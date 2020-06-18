@@ -19,6 +19,8 @@ export class D3ForceGraphSearchStrategy extends D3SearchStrategy<Vertex> {
      d3.selectAll<SVGLineElement, Edge>(
       `.${ClassElementNames.forceEdgesClassName}`
     ).attr('stroke-opacity', 0.1)
+    d3.selectAll(`.${ClassElementNames.forceVerticesClassName}`)
+    .attr('opacity', 0.2)
     // then call the highlight callback for each vertex found during the search
     this.previousSearch.forEach(d => this.highlightCallback(d))
   }

@@ -16,6 +16,7 @@ import GraphComponent from 'components/visualizations/GraphComponent'
 import data from '../../data/musae_git_data-reduced'
 import generateReactKey from 'utils/reactKeyGeneration'
 import { AuthorNetworkProps, AuthorNetworkState, GraphTypes } from 'typedecls/ReactPropsAndStates'
+import { ContainerDimensions } from 'typedecls/CssStyleTypes'
 
 // Not possible to create the data for the d3-hierarchy at compile time
 // Extracting the data is also not possible because JSON.stringify fails
@@ -40,9 +41,10 @@ export default class AuthorNetwork extends React.Component<
 
   constructor(props: AuthorNetworkProps) {
     super(props)
+    const containerDims = {width: window.innerWidth, height: window.innerHeight}
     // create react components as class members to easily switch between them
-    this.forceGraphComponent = this.createForceGraphComponent()
-    this.edgeBundlingGraphComponent = this.createEdgeBundlingGraph()
+    this.forceGraphComponent = this.createForceGraphComponent(containerDims)
+    this.edgeBundlingGraphComponent = this.createEdgeBundlingGraph(containerDims)
     // this is enabled by the dependency react-force-graph-3d
     // Normally I would have not resorted to using a 'does it all package'
     // due to the project's context in a university module about
@@ -52,6 +54,8 @@ export default class AuthorNetwork extends React.Component<
     this.threeDimensionalForceGraphComponent = <ForceGraph3D
       key={generateReactKey('3dforceGraph', 1)}
       graphData={{ nodes: data.vertices, links: data.edges }}
+      width={containerDims.width - 200}
+      height={containerDims.height}
     />
 
     this.state = {
@@ -84,13 +88,13 @@ export default class AuthorNetwork extends React.Component<
     })
   }
 
-  createForceGraphComponent() {
+  createForceGraphComponent(containerDims: ContainerDimensions) {
     const forceGraphFactory = new D3ForceGraph()
 
     return (
       <GraphComponent
         key={generateReactKey('forceGraph', 1)}
-        window={{width: window.innerWidth, height: window.innerHeight}}
+        window={containerDims}
         containerClassName={ClassElementNames.forceDirectedClassName}
         loadData={() => data}
         graphFactory={forceGraphFactory}
@@ -99,13 +103,13 @@ export default class AuthorNetwork extends React.Component<
     )
   }
 
-  createEdgeBundlingGraph() {
-    const edgeBundlingGraphFactory = new D3EdgeBundlingGraph(root)
+  createEdgeBundlingGraph(containerDims: ContainerDimensions) {
+    const edgeBundlingGraphFactory = new D3EdgeBundlingGraph(root, containerDims)
 
     return (
       <GraphComponent
         key={generateReactKey('edgeBundlingGraph', 1)}
-        window={{width: window.innerWidth, height: window.innerHeight}}
+        window={containerDims}
         containerClassName={ClassElementNames.edgeBundlingClassName}
         loadData={() => root}
         graphFactory={edgeBundlingGraphFactory}

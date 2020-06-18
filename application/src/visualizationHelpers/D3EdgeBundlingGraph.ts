@@ -12,8 +12,24 @@ import {D3Graph} from './D3Graph'
 const edgesClassSelector = `${ClassElementNames.svgGElementName}.${ClassElementNames.edgeBundlingEdgesClassName}`
 
 export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
-  constructor(root: EdgeBundlingNode) {
+
+  lineGenerator: d3.LineRadial<EdgeBundlingNode>
+  cluster: d3.ClusterLayout<NodeElem>
+  rootNode: EdgeBundlingNode
+
+  constructor(root: EdgeBundlingNode, containerDims: ContainerDimensions) {
     super()
+
+    this.lineGenerator = d3
+      .lineRadial<EdgeBundlingNode>()
+      .curve(d3.curveBundle.beta(0.85))
+      .radius(d => d.y)
+      .angle(d => d.x)
+
+    this.cluster = d3
+      .cluster<NodeElem>()
+      .size([2 * Math.PI, containerDims.width / 3])
+    this.rootNode = this.cluster(root) as EdgeBundlingNode
 
     this.searchStrategy = new D3EdgeBundlingSearchStrategy(
       root,
@@ -125,30 +141,26 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
       d3.selectAll(selectedVertex.followers.map(({target}) => target.text)),
       [{name: 'fill', value: Colors.colorOut}, boldFont]
     )
+    d3.select(selectedVertex.text).attr('font-weight', 'bold')
   }
 
   dehighlightSelectedVertex(selectedVertex: EdgeBundlingNode) {
     d3.selectAll(edgesClassSelector).style('mix-blend-mode', 'multiply')
+    const pathElems = d3.selectAll(selectedVertex.following.map(edge => edge.svgPath).concat(selectedVertex.followers.map(edge => edge.svgPath)))
     colorEdges(
-      d3.selectAll(selectedVertex.following.map(edge => edge.svgPath)),
-      Colors.colorNone
-    )
-    colorEdges(
-      d3.selectAll(selectedVertex.followers.map(edge => edge.svgPath)),
+      pathElems,
       Colors.colorNone
     )
     const attrs: SVGCSSAttribute[] = [
       {name: 'fill', value: null},
       {name: 'font-weight', value: null},
     ]
+    const textElems = d3.selectAll(selectedVertex.followers.map(({target}) => target.text).concat(selectedVertex.following.map(({source}) => source.text)))
     applyAttrsToSelection(
-      d3.selectAll(selectedVertex.followers.map(({target}) => target.text)),
+      textElems,
       attrs
     )
-    applyAttrsToSelection(
-      d3.selectAll(selectedVertex.following.map(({source}) => source.text)),
-      attrs
-    )
+    d3.select(selectedVertex.text).attr('font-weight', null)
   }
 
   updateHook(
@@ -156,26 +168,13 @@ export class D3EdgeBundlingGraph extends D3Graph<EdgeBundlingNode> {
     props: GraphProps,
     state: GraphState
   ): void {
-    const {width} = props.window
-    const root = state.data as EdgeBundlingNode
-
-    const cluster: d3.ClusterLayout<NodeElem> = d3
-      .cluster<NodeElem>()
-      .size([2 * Math.PI, width / 3])
-    const rootNode = cluster(root) as EdgeBundlingNode
-    const lineGenerator = d3
-      .lineRadial<EdgeBundlingNode>()
-      .curve(d3.curveBundle.beta(0.85))
-      .radius(d => d.y)
-      .angle(d => d.x)
-
     this.prepareGroupElements(selection)
-    this.createVertices(selection, (rootNode as unknown) as EdgeBundlingNode)
+    this.createVertices(selection, (this.rootNode as unknown) as EdgeBundlingNode)
     // creating the edges once via either incoming or outgoing is enough.
     this.createEdges(
       selection,
-      lineGenerator,
-      rootNode.leaves().flatMap(node => node.followers)
+      this.lineGenerator,
+      this.rootNode.leaves().flatMap(node => node.followers)
     )
   }
 }

@@ -29,6 +29,10 @@ div {
   outline: none !important;
 }
 
+canvas {
+  width: 100%;
+}
+
 .header {
   position: absolute;
   top: 0;

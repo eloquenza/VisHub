@@ -183,15 +183,14 @@ export class D3ForceGraph extends D3Graph<Vertex> {
   // normally I should also highlight the vertices here, that are directly
   // connected to the selected vertex - but currently the data is not formatted as a adjacency list.
   highlightSelectedVertex(selectedVertex: Vertex): void {
-    // const avatar = document.createElement('img')
-    // avatar.id = 'avatarImage'
-    // avatar.src = (tooltips.data as UserNameAsKey)[selectedVertex.name || 'undefined']?.avatarUrl || 'undefined'
-    // avatar.style.position = 'absolute';
-    // avatar.style.height = '50px';
-    // avatar.style.width = '50px';
-    // avatar.style.top = (d3.event.pageY || d3.event.clientY) + 'px';
-    // avatar.style.left = (d3.event.pageX || d3.event.clientX) + 'px';
-    // document.body.appendChild(avatar)
+    // this needs to be here, as otherwise there is no way to make
+    // a correct multi-selecting search
+    if (d3.event !== null && d3.event.type == 'mouseover') {
+      d3.selectAll(`.${ClassElementNames.forceVerticesClassName}`)
+      .attr('opacity', 0.1)
+    }
+
+    const verticesToHighlight: Vertex[] = []
 
     highlightIncidentForceEdges(selectedVertex, (edge: Edge, index: number, nodes: ArrayLike<SVGLineElement>) => {
         const source = edge.source as Vertex
@@ -201,10 +200,23 @@ export class D3ForceGraph extends D3Graph<Vertex> {
           // if the triggering event is a mouseover, then lower the
           // opacity of each edge not directly incident to the selected
           // vertex in order to make it clear, which vertex is getting /// highlighted
+          verticesToHighlight.push(source)
+          verticesToHighlight.push(target)
           // this needs to be here, as otherwise there is no way to make
           // a correct multi-selecting search
         } else if (d3.event !== null && d3.event.type == 'mouseover') {
           d3.select(nodes[index]).attr('stroke-opacity', 0.1)
+        }
+    })
+
+    // highlight all vertices that are incident
+    d3.selectAll<SVGCircleElement, Vertex>(`.${ClassElementNames.forceVerticesClassName}`)
+    .each((v: Vertex, i: number, arr: ArrayLike<SVGCircleElement>) => {
+        if (verticesToHighlight.includes(v)) {
+          d3.select(arr[i]).attr('opacity', 0.4)
+        }
+        if (v.id == selectedVertex.id) {
+          d3.select(arr[i]).attr('opacity', 1)
         }
     })
   }
