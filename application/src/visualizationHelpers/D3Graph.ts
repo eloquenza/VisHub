@@ -83,6 +83,8 @@ export abstract class D3Graph<VertexType>
     const zoomBehaviour = d3.zoom<SVGElement, any>().filter(() => {
       if (d3.event.type === 'wheel') {
         return d3.event.ctrlKey
+      } else if (d3.event.type === 'dblclick') {
+        return false;
       }
       return true
     })
