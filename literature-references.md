@@ -59,6 +59,7 @@ Newer versions seem to be based on GraphQL:
 #### Ideas of visualizations in general built in d3
 
 [Interactive notebooks of visualizations](https://observablehq.com/@d3)
+[Interesting controls/interactions with a force graph (dblclick zoom, max limit on zooming)](http://bl.ocks.org/eyaler/10586116) 
 
 #### Search possibilities in a graph
 
