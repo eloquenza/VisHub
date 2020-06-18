@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 
 import {ClassElementNames} from 'appConstants'
 import {ContainerDimensions} from 'typedecls/CssStyleTypes'
-import {D3Graph} from './D3Graph'
+import {D3Graph, zoomContainerCSSSelector} from './D3Graph'
 import {D3ForceGraphSearchStrategy} from './D3ForceGraphSearchStrategy'
 
 export class D3ForceGraph extends D3Graph<Vertex> {
@@ -86,10 +86,22 @@ export class D3ForceGraph extends D3Graph<Vertex> {
       .on('mouseover', this.highlightSelectedVertex)
       .on('mouseout', this.dehighlightSelectedVertex)
       // if vertex is fixed, remove via double click and reset color
-      .on('dblclick', (v: Vertex, index: number, array: ArrayLike<SVGCircleElement>) => {
-        d3.select(array[index]).attr("fill", null)
+      .on('click', (v: Vertex, index: number, array: ArrayLike<SVGCircleElement>) => {
+        if (d3.event.ctrlKey) {
+          d3.select(array[index]).attr("fill", null)
           v.fx = null // eslint-disable-line no-param-reassign
           v.fy = null // eslint-disable-line no-param-reassign
+        }
+      })
+      .on('dblclick.zoom', (v: Vertex, i: number, array: ArrayLike<SVGCircleElement>) => {
+        const transform = d3.zoomTransform(array[i])
+        // transform.k - the scale factor k. according to documentation
+        const vx = v?.x || 0
+        const vy = v?.y || 0
+        const deltaX = (window.innerWidth/2-vx*transform.k);
+	      const deltaY = (window.innerHeight/2-vy*transform.k);
+        const newTransform = d3.zoomIdentity.translate(deltaX, deltaY).scale(transform.k);
+        d3.select(zoomContainerCSSSelector).attr("transform", newTransform.toString());
       })
 
       this.addDragEventListener(
