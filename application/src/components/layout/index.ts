@@ -1,4 +1,4 @@
-import NavBar from './NavBar'
+import Sidebar from './Sidebar'
 import AuthorNetwork from './AuthorNetwork'
 
-export {NavBar, AuthorNetwork}
+export {Sidebar, AuthorNetwork}
